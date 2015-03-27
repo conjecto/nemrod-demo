@@ -3,9 +3,9 @@
 {% block body %}
 <div class="container">
 <h1>{{ laureate['rdfs:label'].value }}</h1>
-    <dl class="horizontal-dl">
-        <dd>Birth</dd>
-        <dt>laureate['foaf:birthday'].value</dt>
+    <dl class="dl-horizontal">
+        <dt>Birth</dt>
+        <dd>{{ laureate['foaf:birthday'].value|date('Y-m-d') }}</dd>
     </dl>
 </div>
 {% endblock %}
