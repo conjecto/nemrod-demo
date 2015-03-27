@@ -1,0 +1,11 @@
+{% extends "DemoBundle::base.html.twig" %}
+
+{% block body %}
+<div class="container">
+<h1>{{ laureate['rdfs:label'].value }}</h1>
+    <dl class="horizontal-dl">
+        <dd>Birth</dd>
+        <dt>laureate['foaf:birthday'].value</dt>
+    </dl>
+</div>
+{% endblock %}
