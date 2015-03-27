@@ -42,13 +42,19 @@ The command will tell te project's url.
 
 ### Setting up a bigdata server and put data into it
 
+You first need to download a bundled version of [Blazegraph][3]. It can be done [here][5], or using curl with the following command:
+
+    curl -L http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download > bigdata-bundled.jar
+
 The project comes with a bundled version of [Blazegraph][3]. You can launch it with the following command:
 
     java -server -Xmx4g -jar bigdata-bundled.jar
+    
+You will probably need to adjust the maximm allocation pool parameter. Try for example -Xmx2g or -Xmx1g if you get an error with -Xmx4g. 
 
-A set of data concerning [Nobel Prize laureates][4] is provided with the project. Load it into Blazegraph using:
+The demo project is built over a set of data describing [Nobel Prize laureates][4]. Load it into Blazegraph using:
 
-    curl -X POST --data-binary "uri=file:///c:/path/to/project/dir/app/Resources/data/dump.nt" http://localhost:9999/bigdata/sparql
+    curl -X POST --data-binary "uri=http://data.nobelprize.org/dump.nt" http://localhost:9999/bigdata/sparql
 
 # The project is ready to be tested now !
 
@@ -60,3 +66,4 @@ Try it at :
 [2]:  http://getcomposer.org/
 [3]:  http://www.blazegraph.com/
 [4]:  http://datahub.io/dataset/nobelprizes
+[5]: http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download
