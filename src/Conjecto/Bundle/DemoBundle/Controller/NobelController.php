@@ -8,9 +8,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class NobelController extends Controller
 {
+
+    /**
+     * @Route("/", name="laureate.random")
+     * @Template("DemoBundle:Nobel:index.html.twig")
+     */
+    public function indexAction()
+    {
+        $random = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => 2005));
+
+        return array("laureates" => $random);
+    }
+
     /**
      * @Route("/year/{year}", name="laureate.year")
-     * @Template("DemoBundle:Nobel:index.html.twig")
+     * @Template("DemoBundle:Nobel:year.html.twig")
      */
     public function yearAction($year)
     {

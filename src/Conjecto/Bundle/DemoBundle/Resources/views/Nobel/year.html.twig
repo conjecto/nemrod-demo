@@ -3,15 +3,15 @@
 {% block body %}
 
 <div class="container">
-    <h1>Some random Nobel prizes</h1>
+    <h1>List of laureates for year {{ year }}</h1>
     <div class="list-group">
-        {% for laureateaward in laureates %}
+    {% for laureateaward in laureates %}
         <div class="list-group-item">
             <h4 class="list-group-item-heading">{{ laureateaward['rdfs:label'].value }}</h4>
             <p class="list-group-item-text">{{ attribute(laureateaward, 'get', ['terms:motivation']).value }}</p>
             <a href="{{ path('laureate.view', {uri: laureateaward.uri}) }}">see more</a>
         </div>
-        {% endfor %}
+    {% endfor %}
     </div>
 </div>
 {% endblock %}
