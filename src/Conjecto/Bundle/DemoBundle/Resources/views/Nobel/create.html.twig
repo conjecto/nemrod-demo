@@ -1,0 +1,22 @@
+{% extends "DemoBundle::base.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Nobel prizes</h1>
+
+{{ form_start(form) }}
+{% for child in form.children%}
+{{ form_row(child) }}
+{% endfor %}
+
+<div class="form-group">
+    <div>
+        <button class="btn btn-default" type="submit" >Créer</button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+</div>
+{% endblock %}

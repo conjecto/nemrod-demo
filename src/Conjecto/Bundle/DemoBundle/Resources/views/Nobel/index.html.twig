@@ -3,15 +3,18 @@
 {% block body %}
 
 <div class="container">
-    <h1>Some random Nobel prizes</h1>
-    <div class="list-group">
-        {% for laureateaward in laureates %}
-        <div class="list-group-item">
-            <h4 class="list-group-item-heading">{{ laureateaward['rdfs:label'].value }}</h4>
-            <p class="list-group-item-text">{{ attribute(laureateaward, 'get', ['terms:motivation']).value }}</p>
-            <a href="{{ path('laureate.view', {uri: laureateaward.uri}) }}">see more</a>
-        </div>
-        {% endfor %}
-    </div>
+    <h1>Nobel prizes</h1>
+
+    <h2>By year</h2>
+    {% for year in years %}
+        <a href="{{ path('laureate.year', {year: year.year.value}) }}" class="btn btn-default btn-sm">{{ year.year.value }}</a>
+    {% endfor %}
+
+    <h2>By category</h2>
+    {% for category in categories %}
+        <a href="{{ path('laureate.category', {category: category.uri}) }}" class="btn btn-default btn-sm">{{ category['rdfs:label'] }}</a>
+    {% endfor %}
+    <hr />
+    <a class="btn btn-primary" href="{{ path( 'laureate.create') }}">add one</a>
 </div>
 {% endblock %}

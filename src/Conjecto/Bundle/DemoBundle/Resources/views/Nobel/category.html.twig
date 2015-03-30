@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="container">
-    <h1>List of laureates for year {{ year }}</h1>
+    <h1>List of laureates for category {{ category['rdfs:label'] }}</h1>
     <div class="list-group">
     {% for laureateaward in laureates %}
         <div class="list-group-item">

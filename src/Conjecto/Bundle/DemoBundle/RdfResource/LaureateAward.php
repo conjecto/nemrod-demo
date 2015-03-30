@@ -10,6 +10,7 @@ namespace Conjecto\Bundle\DemoBundle\RdfResource;
 
 use Conjecto\Nemrod\Resource as BaseResource;
 use Conjecto\Nemrod\ResourceManager\Annotation\Resource;
+use Conjecto\Nemrod\ResourceManager\Annotation\Property;
 
 /**
  * Class ExampleResource
@@ -19,4 +20,8 @@ use Conjecto\Nemrod\ResourceManager\Annotation\Resource;
 class LaureateAward extends BaseResource
 {
 
+    /**
+     * @Property("terms:laureate", cascade={"persist"})
+     */
+    protected $laureate;
 } 
