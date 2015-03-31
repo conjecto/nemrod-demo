@@ -38,7 +38,7 @@ Run a web server allowing to access the symfony project with the following comma
 
     php app/console server:run
     
-The command will tell te project's url.
+The command will tell you te project's url. This is where the demo will be available at the end of the setup
 
 ### Setting up a bigdata server and put data into it
 
@@ -58,7 +58,10 @@ The demo project is built over a set of data describing [Nobel Prize laureates][
 
 # The project is ready to be tested now !
 
-Try it at :
+Try it at the url that was given when launching the server. For now, you can
+ 
+ - bowse the nobel prize by years / categories
+ - add a new nobel prize.
 
 
 
