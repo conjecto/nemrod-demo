@@ -53,3 +53,6 @@ nemrod:
     #add the namespaces you need
     nobel: "http://data.nobelprize.org/resource/"
     terms: "http://data.nobelprize.org/terms/"
+    dbpprop: "http://dbpedia.org/property/"
+    dbpedia: "http://dbpedia.org/resource/"
+    dbpediaowl: "http://dbpedia.org/ontology/"

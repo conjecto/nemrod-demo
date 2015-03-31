@@ -19,7 +19,22 @@
     {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
     {{ parent() }}
 {% endblock textarea_widget %}
- 
+
+{% block choice_widget %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {{ parent() }}
+{% endblock choice_widget %}
+
+{% block date_widget %}
+    <div {{ block('widget_container_attributes') }}>
+        {{ '<div class="col-md-4">{{ day }}</div><div class="col-md-4">{{ month }}</div><div class="col-md-4">{{ year }}</div>'|replace({
+        '{{ day }}': form_widget(form.day),
+        '{{ month }}': form_widget(form.month),
+        '{{ year }}': form_widget(form.year),
+        })|raw }}
+    </div>
+{% endblock date_widget %}
+
 {% block form_widget_simple %}
     {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
     {{ parent() }}

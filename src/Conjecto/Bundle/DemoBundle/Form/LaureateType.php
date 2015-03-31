@@ -18,10 +18,10 @@ class LaureateType extends ResourceFormType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('foaf:givenName', 'text', array('label' => 'given name'));
+        $builder->add('foaf:givenName', 'text', array('label' => 'Given name'));
 
-        $builder->add('foaf:familyName', 'text', array('label' => 'family name'));
-        $builder->add('foaf:birthDay', 'date', array('label' => 'birthday'));
+        $builder->add('foaf:familyName', 'text', array('label' => 'Family name'));
+        $builder->add('foaf:birthday', 'date', array('label' => 'Birthday'));
     }
 
     public function getName()

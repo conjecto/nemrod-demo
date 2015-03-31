@@ -13,7 +13,7 @@ class NobelController extends Controller
 {
 
     /**
-     * @Route("/all/", name="laureate.index")
+     * @Route("/", name="laureate.index")
      * @Template("DemoBundle:Nobel:index.html.twig")
      */
     public function indexAction()
@@ -64,7 +64,20 @@ class NobelController extends Controller
     {
         $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
 
-        return array("award" => $laureateaward , "laureate" => $laureateaward->get('terms:laureate'));
+        //tweaks to get more infos. @todo in Nemrod : find a way to replace base (EasyRdf) Resource by framework's one
+        $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($laureateaward->get('terms:laureate/dbpediaowl:birthPlace')->getUri());
+        $laureatedeathplace = $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri());
+
+        $laureateaward->get("terms:category/rdfs:label");
+
+        return array(
+            "award" => $laureateaward ,
+            "laureate" => $laureateaward->get('terms:laureate'),
+            "places" => array (
+                "birth" => $laureatebirthplace,
+                "death" => $laureatedeathplace
+            )
+        );
     }
 
     /**
@@ -83,11 +96,11 @@ class NobelController extends Controller
 
             $this->get('rm')->persist($laureateaward);
 
-            $laureateaward->set('rdfs:label', "bob");
+            //$laureateaward->set('rdfs:label', "bob");
 
             $this->get('rm')->flush();
 
-            return $this->redirect($this->generateUrl('laureate.index'));
+            return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
         }
 
 
