@@ -5,10 +5,16 @@
     <h1>Award details</h1>
     <h2>Award</h2>
     <dl class="dl-horizontal">
-        {{ dump(award['terms:category']) }}
+        {# dump(attribute(award['terms:category'], 'get', ['rdfs:label'])) #}
         <dt>Category</dt>
         <dd>{{ attribute(award['terms:category'], 'get', ['rdfs:label']) }}</dd>
     </dl>
+    {% if (award['terms:motivation'] is defined) %}
+    <dl class="dl-horizontal">
+        <dt>Motivation</dt>
+        <dd>{{ award['terms:motivation'].value }}</dd>
+    </dl>
+    {% endif %}
     <dl class="dl-horizontal">
         <dt>Field</dt>
         <dd>{{ award['terms:field'] }}</dd>
@@ -22,7 +28,7 @@
         <dt>Birth</dt>
         <dd>{{ laureate['foaf:birthday'].value|date('Y/m/d') }} {% if(places.birth is defined) %}({{ attribute(places.birth, 'get', ['rdfs:label']).value }}){% endif %}</dd>
     </dl>
-    {% if(laureate['dbpprop:dateOfDeath'] is not empty) %}
+    {% if(laureate['dbpprop:dateOfDeath'] is defined) %}
     <dl class="dl-horizontal">
         <dt>Death</dt>
         <dd>{{ laureate['dbpprop:dateOfDeath'].value|date('Y/m/d') }}{% if(places.death is defined) %}({{ attribute(places.death, 'get', ['rdfs:label']).value }}){% endif %}</dd>

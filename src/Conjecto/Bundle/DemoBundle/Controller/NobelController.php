@@ -66,9 +66,9 @@ class NobelController extends Controller
 
         //tweaks to get more infos. @todo in Nemrod : find a way to replace base (EasyRdf) Resource by framework's one
         $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($laureateaward->get('terms:laureate/dbpediaowl:birthPlace')->getUri());
-        $laureatedeathplace = $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri());
+        $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
 
-        $laureateaward->get("terms:category/rdfs:label");
+        //echo $laureateaward->get("terms:category/rdfs:label");
 
         return array(
             "award" => $laureateaward ,
