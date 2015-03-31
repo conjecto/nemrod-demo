@@ -1,0 +1,44 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{# On commence par simplement ajouter le form-group au row de nos formulaires #}
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group {{ errors|length > 0 ? 'has-error' : '' }}">
+            {{ form_label(form, null, {label_attr: {'class': "col-sm-2 control-label"}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+ 
+{# Puis on modifie très simplement nos input et textarea
+   les plus importants pour y ajouter le class imposée par Bootstrap 3 #}
+{% block textarea_widget %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {{ parent() }}
+{% endblock textarea_widget %}
+ 
+{% block form_widget_simple %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {{ parent() }}
+{% endblock form_widget_simple %}
+ 
+{% block form_label %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+    {{ parent() }}
+{% endblock form_label %}
+ 
+{# et enfin les erreurs #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <span class="help-block alert-danger">
+                {% for error in errors %}
+                    {{ error.message }}<br />
+                {% endfor %}
+            </span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

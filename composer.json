@@ -18,7 +18,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "conjecto/nemrod": "~0.1.0@dev"
+        "conjecto/nemrod": "dev-develop"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

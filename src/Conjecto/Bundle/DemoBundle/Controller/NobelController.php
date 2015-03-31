@@ -13,7 +13,7 @@ class NobelController extends Controller
 {
 
     /**
-     * @Route("/", name="laureate.index")
+     * @Route("/all/", name="laureate.index")
      * @Template("DemoBundle:Nobel:index.html.twig")
      */
     public function indexAction()
@@ -39,7 +39,7 @@ class NobelController extends Controller
     {
         $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => $year));
 
-        var_dump($laureates);
+        //var_dump($laureates);
 
         return array("year" => $year, "laureates" => $laureates);
     }
@@ -68,7 +68,7 @@ class NobelController extends Controller
     }
 
     /**
-     * @Route("/create", name="laureate.index")
+     * @Route("/create", name="laureate.create")
      * @Template("DemoBundle:Nobel:create.html.twig")
      */
     public function createAction(Request $request)
@@ -82,6 +82,8 @@ class NobelController extends Controller
             $form->handleRequest($request);
 
             $this->get('rm')->persist($laureateaward);
+
+            $laureateaward->set('rdfs:label', "bob");
 
             $this->get('rm')->flush();
 

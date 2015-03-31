@@ -1,17 +1,19 @@
 {% extends "DemoBundle::base.html.twig" %}
 
+{% form_theme form ':Form:fields.html.twig' %}
+
 {% block body %}
 
 <div class="container">
-    <h1>Nobel prizes</h1>
+    <h1>Add a Nobel prize</h1>
 
-{{ form_start(form) }}
+{{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
 {% for child in form.children%}
 {{ form_row(child) }}
 {% endfor %}
 
 <div class="form-group">
-    <div>
+    <div class="col-sm-offset-2 col-sm-10">
         <button class="btn btn-default" type="submit" >Créer</button>
     </div>
 </div>

@@ -13,9 +13,9 @@ class AwardType extends ResourceFormType
 
     protected $rm;
 
-    public function __construct($nsReg, $rm){
+    public function __construct($rm){
         $this->rm = $rm;
-        return parent::__construct($nsReg);
+        return parent::__construct($rm);
     }
 
 
@@ -31,8 +31,8 @@ class AwardType extends ResourceFormType
         $builder->add('terms:motivation', 'text', array('label' => 'motivation'));
         $builder->add('terms:field', 'text', array('label' => 'nom'));
         $builder->add('terms:category', 'text', array('label' => 'category'));
-        $builder->add('terms:laureate', new LaureateType($this->nsRegistry), array(
-            'data_type' => 'terms:Laureate',
+        $builder->add('terms:laureate', new LaureateType($this->rm), array(
+            'data_class' => 'Conjecto\Bundle\DemoBundle\RdfResource\Laureate',
             'empty_data' => function () use ($options){
             return $this->rm->getRepository('terms:Laureate')->create();
         }));
