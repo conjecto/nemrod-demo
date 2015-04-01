@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="325f0cc2-716b-4ee0-a769-1559aec8193c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Form/LaureateType.php" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Form/LaureateType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Controller/NobelController.php" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Controller/NobelController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/category.html.twig" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/category.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/create.html.twig" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/create.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/index.html.twig" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/view.html.twig" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/view.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/year.html.twig" afterPath="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/year.html.twig" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\nemrod_test.iml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\workspace\nemrod_test\.idea\workspace.xml" afterPath="" />
     </list>
     <ignored path="nemrod_test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,11 +55,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17926186" vertical-offset="0" max-vertical-offset="569">
+            <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="493">
               <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="453" max-vertical-offset="1071">
+              <caret line="53" column="48" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/easyrdf/easyrdf/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="238">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593">
+              <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -104,38 +131,6 @@
             <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="544">
               <caret line="21" column="115" selection-start-line="20" selection-start-column="12" selection-end-line="21" selection-end-column="115" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimplePersister.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/conjecto/nemrod/src/Conjecto/Nemrod/ResourceManager/SimplePersister.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.307692" vertical-offset="5458" max-vertical-offset="9180">
-              <caret line="359" column="112" selection-start-line="359" selection-start-column="112" selection-end-line="359" selection-end-column="112" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResourcePropertyPathMapper.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/conjecto/nemrod/src/Conjecto/Nemrod/Form/Extension/Core/DataMapper/ResourcePropertyPathMapper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.384615" vertical-offset="2610" max-vertical-offset="4284">
-              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="190" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Query.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/conjecto/nemrod/src/Conjecto/Nemrod/QueryBuilder/Query.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.807693" vertical-offset="4650" max-vertical-offset="7412">
-              <caret line="294" column="64" selection-start-line="294" selection-start-column="0" selection-end-line="294" selection-end-column="64" />
-              <folding>
-                <element signature="e#6#228#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -183,7 +178,6 @@
         <option value="$PROJECT_DIR$/vendor/conjecto/nemrod/src/Conjecto/Nemrod/Form/Extension/Core/Type/ResourceFormType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/Form/fields.html.twig.html" />
         <option value="$PROJECT_DIR$/app/Resources/views/Form/fields.html.twig" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Form/AwardType.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -201,6 +195,7 @@
         <option value="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/create.html.twig" />
         <option value="$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/index.html.twig" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -1390,7 +1385,19 @@
       <option name="project" value="LOCAL" />
       <updated>1427819799436</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- some fixes on forms&#10;- added breadcrumbs everywhere">
+      <created>1427899910432</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1427899910432</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added .idea to gitignore">
+      <created>1427900864222</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1427900864222</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1468,7 +1475,9 @@
     <MESSAGE value="updated creation form&#10;updated award view page." />
     <MESSAGE value="changed repo name" />
     <MESSAGE value="fix in list &amp; details views" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix in list &amp; details views" />
+    <MESSAGE value="- some fixes on forms&#10;- added breadcrumbs everywhere" />
+    <MESSAGE value="added .idea to gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="added .idea to gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1484,13 +1493,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/composer/ClassLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="163.15384" vertical-offset="4242" max-vertical-offset="6545">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/logs/dev.log">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="16017" max-vertical-offset="17833">
@@ -1644,14 +1646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593">
-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/cache/dev/appDevDebugProjectContainer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2592592" vertical-offset="27194" max-vertical-offset="69887">
@@ -1659,14 +1653,6 @@
           <folding>
             <element signature="e#7#68#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1071">
-          <caret line="53" column="48" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1900,8 +1886,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Conjecto/Bundle/DemoBundle/Resources/views/Nobel/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17926186" vertical-offset="0" max-vertical-offset="569">
+        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="493">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="453" max-vertical-offset="1071">
+          <caret line="53" column="48" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/easyrdf/easyrdf/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593">
+          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
           <folding />
         </state>
       </provider>
