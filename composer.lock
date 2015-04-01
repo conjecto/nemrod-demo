@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7763361cca55b6b3ee3964831c833214",
+    "hash": "a0c66af114e57662936487281aff9769",
     "packages": [
         {
             "name": "conjecto/nemrod",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/conjecto/nemrod.git",
-                "reference": "daa2fcfd90ecad97c71ac12dea7b3f19c31add83"
+                "reference": "d30c6ecc4e9b345e2715a40f7eaa784c8e1287c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/daa2fcfd90ecad97c71ac12dea7b3f19c31add83",
-                "reference": "daa2fcfd90ecad97c71ac12dea7b3f19c31add83",
+                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/d30c6ecc4e9b345e2715a40f7eaa784c8e1287c2",
+                "reference": "d30c6ecc4e9b345e2715a40f7eaa784c8e1287c2",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "rdfa",
                 "sparql"
             ],
-            "time": "2015-03-31 09:53:25"
+            "time": "2015-04-01 12:33:35"
         },
         {
             "name": "doctrine/annotations",
@@ -1272,12 +1272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "df7da8a5550eb94cb885df6be7ffebe2768c10fd"
+                "reference": "875cfb91e1ffb9a7fda4dddfdbc7ed529e52164a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/df7da8a5550eb94cb885df6be7ffebe2768c10fd",
-                "reference": "df7da8a5550eb94cb885df6be7ffebe2768c10fd",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/875cfb91e1ffb9a7fda4dddfdbc7ed529e52164a",
+                "reference": "875cfb91e1ffb9a7fda4dddfdbc7ed529e52164a",
                 "shasum": ""
             },
             "require": {
@@ -1337,7 +1337,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-03-26 18:30:54"
+            "time": "2015-03-31 21:43:29"
         },
         {
             "name": "phpcollection/phpcollection",

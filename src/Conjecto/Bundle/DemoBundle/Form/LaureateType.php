@@ -21,7 +21,18 @@ class LaureateType extends ResourceFormType
         $builder->add('foaf:givenName', 'text', array('label' => 'Given name'));
 
         $builder->add('foaf:familyName', 'text', array('label' => 'Family name'));
-        $builder->add('foaf:birthday', 'date', array('label' => 'Birthday'));
+        $builder->add('foaf:birthday', 'date', array(
+            'years'         => range(1800 , date('Y')),
+            'label' => 'Date of birth')
+        );
+        $builder->add('dbpprop:dateOfDeath', 'date', array(
+            'label' => 'Date of death',
+            'empty_value' => '',
+            'empty_data' => null,
+            'required' => false,
+            'years'         => range(1900 , date('Y')),
+            )
+        );
     }
 
     public function getName()

@@ -5,6 +5,17 @@
 {% block body %}
 
 <div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ path('laureate.index') }}">Home</a></li>
+        {% if year is defined %}
+            <li><a href="{{ path('laureate.year', {year: year}) }}">{{ year }}</a></li>
+        {% endif %}
+
+        {% if category is defined %}
+            <li><a href="{{ path('laureate.category', {category: category.uri}) }}">{{ category.label }}</a></li>
+        {% endif %}
+        <li><a href="#">create</a></li>
+    </ol>
     <h1>Add a Nobel prize</h1>
 
 {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}

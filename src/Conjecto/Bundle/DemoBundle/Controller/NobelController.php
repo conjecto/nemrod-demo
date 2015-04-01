@@ -68,10 +68,11 @@ class NobelController extends Controller
         $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($laureateaward->get('terms:laureate/dbpediaowl:birthPlace')->getUri());
         $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
 
-        //echo $laureateaward->get("terms:category/rdfs:label");
+        $categ = $laureateaward->get("terms:category/rdfs:label");
 
         return array(
             "award" => $laureateaward ,
+            "category" => $categ,
             "laureate" => $laureateaward->get('terms:laureate'),
             "places" => array (
                 "birth" => $laureatebirthplace,
@@ -81,15 +82,14 @@ class NobelController extends Controller
     }
 
     /**
-     * @Route("/create", name="laureate.create")
-     * @Template("DemoBundle:Nobel:create.html.twig")
+     * @Route("/edit/{uri}", name="laureate.edit", requirements={"uri" = ".+"})
+     * @Template("DemoBundle:Nobel:edit.html.twig")
      */
-    public function createAction(Request $request)
+    public function editAction(Request $request, $uri)
     {
-        $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->create();
+        $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
 
         $form = $form = $this->createForm('award_type', $laureateaward);
-
 
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
@@ -103,8 +103,52 @@ class NobelController extends Controller
             return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
         }
 
+        return array(
+            "form" => $form->createView(),
+            "laureate" => $laureateaward,
+            "year" => $laureateaward->get('terms:year'),
+            "category" => array(
+                "label" => $laureateaward->get('terms:category/rdfs:label'),
+                "uri" => $laureateaward->get('terms:category')->getUri()
+            )
+        );
+    }
 
-        return array("form" => $form->createView());
+    /**
+     * @Route("/create", name="laureate.create")
+     * @Template("DemoBundle:Nobel:create.html.twig")
+     */
+    public function createAction(Request $request)
+    {
+        $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->create();
+
+        if ($year = $request->get('year')) {
+            $laureateaward->set('terms:year', $year);
+        }
+
+        if ($category = $request->get('category')) {
+            $laureateaward->set('terms:category', $this->container->get('rm')->getRepository('terms:Category')->find($category));
+        }
+
+        $form = $form = $this->createForm('award_type', $laureateaward);
+
+        if ($request->getMethod() == "POST") {
+            $form->handleRequest($request);
+            $this->get('rm')->persist($laureateaward);
+            $this->get('rm')->flush();
+
+            return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
+        }
+
+        $data = array("form" => $form->createView());
+        if($year) {
+            $data['year'] = $year ;
+        }
+
+        if($category) {
+            $data['category'] = array ('uri' => $category, 'label' => $this->container->get('rm')->getRepository('terms:Category')->find($category)->get('rdfs:label')) ;
+        }
+        return $data;
     }
 
 }
