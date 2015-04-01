@@ -31,6 +31,10 @@
         <dd>{{ laureate['rdfs:label'].value }}</dd>
     </dl>
     <dl class="dl-horizontal">
+        <dt>Institute</dt>
+        <dd>{{ attribute(attribute(award, 'get', ['terms:university']), 'get', ['rdfs:label']).value }}</dd>
+    </dl>
+    <dl class="dl-horizontal">
         <dt>Birth</dt>
         <dd>{{ laureate['foaf:birthday'].value|date('Y/m/d') }}
             {% if(places.birth is not empty) %}({{ attribute(places.birth, 'get', ['rdfs:label']).value }}){% endif %}
