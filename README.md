@@ -7,7 +7,7 @@ Nemrod framework
 1) Requirements
 ----------------------------------
 
-- PHP > 5.3
+- PHP > 5.3 with php-curl extension enabled
 
 2) Installing the project
 ----------------------------------
@@ -46,7 +46,7 @@ You first need to download a bundled version of [Blazegraph][3]. It can be done 
 
     curl -L http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download > bigdata-bundled.jar
 
-The project comes with a bundled version of [Blazegraph][3]. You can launch it with the following command:
+You can then launch it with the following command:
 
     java -server -Xmx4g -jar bigdata-bundled.jar
     
@@ -64,9 +64,8 @@ Try it at the url that was given when launching the server. For now, you can
  - add a new nobel prize.
 
 
-
-[1]:  http://symfony.com/doc/2.4/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://www.blazegraph.com/
-[4]:  http://datahub.io/dataset/nobelprizes
+[1]: http://symfony.com/doc/2.4/book/installation.html
+[2]: http://getcomposer.org/
+[3]: http://www.blazegraph.com/
+[4]: http://datahub.io/dataset/nobelprizes
 [5]: http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download
