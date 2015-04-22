@@ -40,9 +40,9 @@ Run a web server allowing to access the symfony project with the following comma
     
 The command will tell you te project's url. This is where the demo will be available at the end of the setup
 
-### Setting up a bigdata server and put data into it
+### Setting up a triple store and put data into it
 
-You first need to download a bundled version of [Blazegraph][3]. It can be done [here][5], or using curl with the following command:
+We recommend [Blazegraph][3], a full open-source high-performance graph database. You first need to download a bundled version of Blazegraph. It can be done [here][5], or using curl with the following command:
 
     curl -L http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download > bigdata-bundled.jar
 
