@@ -14,7 +14,7 @@ Nemrod framework
 
 ### Cloning the project
 
-    git clone http://github.com/conjecto/nemroddemo
+    git clone https://github.com/conjecto/nemrod-demo
 
 ### Installing Composer
 
