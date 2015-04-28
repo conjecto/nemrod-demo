@@ -45,7 +45,7 @@ assetic:
 
 nemrod:
   endpoints:
-    my_endpoint: "http://localhost:9999/bigdata/sparql"
+    my_endpoint: "%nemrod_endpoint_host%:%nemrod_endpoint_port%/%nemrod_endpoint_path%"
   default_endpoint: my_endpoint
   namespaces:
     rdfs: "http://www.w3.org/2000/01/rdf-schema#"

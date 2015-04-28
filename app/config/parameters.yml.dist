@@ -11,3 +11,7 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    nemrod_endpoint_host:   http://localhost
+    nemrod_endpoint_port:   9999
+    nemrod_endpoint_path:   bigdata/sparql
