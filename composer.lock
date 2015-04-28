@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "121b5a7534de0acfbfc401c96b22e55d",
+    "hash": "f19b9e14ffd59aa23046e3ea22a37a27",
     "packages": [
         {
             "name": "conjecto/nemrod",
-            "version": "dev-master",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/conjecto/nemrod.git",
-                "reference": "4cb08c7183d4546cbe9e385ddea50fcf867681ed"
+                "reference": "4f48782789f95c359ea3999846fbab8c675f769a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/4cb08c7183d4546cbe9e385ddea50fcf867681ed",
-                "reference": "4cb08c7183d4546cbe9e385ddea50fcf867681ed",
+                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/4f48782789f95c359ea3999846fbab8c675f769a",
+                "reference": "4f48782789f95c359ea3999846fbab8c675f769a",
                 "shasum": ""
             },
             "require": {
@@ -65,7 +65,7 @@
                 "rdfa",
                 "sparql"
             ],
-            "time": "2015-04-22 14:38:58"
+            "time": "2015-04-28 13:03:45"
         },
         {
             "name": "doctrine/annotations",
@@ -1906,7 +1906,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "conjecto/nemrod": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
