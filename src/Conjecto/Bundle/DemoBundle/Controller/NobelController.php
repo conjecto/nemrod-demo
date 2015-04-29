@@ -2,6 +2,8 @@
 
 namespace Conjecto\Bundle\DemoBundle\Controller;
 
+use Conjecto\Nemrod\Resource;
+use EasyRdf\Literal\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -38,7 +40,7 @@ class NobelController extends Controller
      */
     public function yearAction($year)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => $year));
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
 
         return array("year" => $year, "laureates" => $laureates);
     }
@@ -50,7 +52,7 @@ class NobelController extends Controller
      */
     public function categoryAction($category)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => "<".$category.">"));
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category));
 
         return array("category" => $category, "laureates" => $laureates);
     }
@@ -69,6 +71,10 @@ class NobelController extends Controller
 
         $categ = $laureateaward->get("terms:category/rdfs:label");
 
+        echo "###";
+        $test = $this->container->get('rm')->getRepository('terms:LaureateAward')->findOneBy(array( "uri" => $uri));
+        var_dump($test);
+        echo "###";
         return array(
             "award" => $laureateaward ,
             "category" => $categ,
@@ -134,7 +140,7 @@ class NobelController extends Controller
             $this->get('rm')->persist($laureateaward);
             $this->get('rm')->flush();
 
-            return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
+            return $this->redirect($this->generateUrl('laureate.year', array ('year' => 'terms:year')));
         }
 
         $data = array("form" => $form->createView());
