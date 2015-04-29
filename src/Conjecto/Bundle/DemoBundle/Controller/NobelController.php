@@ -71,10 +71,6 @@ class NobelController extends Controller
 
         $categ = $laureateaward->get("terms:category/rdfs:label");
 
-        echo "###";
-        $test = $this->container->get('rm')->getRepository('terms:LaureateAward')->findOneBy(array( "uri" => $uri));
-        var_dump($test);
-        echo "###";
         return array(
             "award" => $laureateaward ,
             "category" => $categ,
