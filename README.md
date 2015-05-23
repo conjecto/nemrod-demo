@@ -8,6 +8,7 @@ Nemrod framework
 ----------------------------------
 
 - PHP > 5.3 with php-curl extension enabled
+- Java Runtime Environment (JRE) 7
 
 2) Installing the project
 ----------------------------------
@@ -56,6 +57,17 @@ The demo project is built over a set of data describing [Nobel Prize laureates][
 
     curl -X POST --data-binary "uri=http://data.nobelprize.org/dump.nt" http://localhost:9999/bigdata/sparql
 
+### (optionnal) setting an Elasticsearch server
+
+[Elasticsearch][6] is a search engine based on Lucene. Nemrod is able to populate an Elasticsearch index in order to make searches 
+and list displays way faster. Follow these few steps if you want to try it on the demo.
+
+You first need to download the current version of ElasticSearch. It can be done [here](https://www.elastic.co/downloads/elasticsearch). You just have to follow
+the installation steps. Once it is done, enable Nemrod ElasticSearch Bundle by uncommenting the following line:
+
+    //new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle(),
+
+
 # The project is ready to be tested now !
 
 Try it at the url that was given when launching the server. For now, you can
@@ -69,3 +81,4 @@ Try it at the url that was given when launching the server. For now, you can
 [3]: http://www.blazegraph.com/
 [4]: http://datahub.io/dataset/nobelprizes
 [5]: http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download
+[6]: https://www.elastic.co/products/elasticsearch

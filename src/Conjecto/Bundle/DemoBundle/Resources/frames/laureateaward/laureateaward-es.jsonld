@@ -1,0 +1,6 @@
+{
+  "@type": "terms:LaureateAward",
+  "rdfs:label": {
+    "@default": "non"
+  }
+}
