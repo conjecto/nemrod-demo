@@ -2,8 +2,13 @@
 
 namespace Conjecto\Bundle\DemoBundle\Controller;
 
+use Conjecto\Nemrod\ElasticSearch\Search;
 use Conjecto\Nemrod\Resource;
 use EasyRdf\Literal\Integer;
+use Elastica\Filter\Bool;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Prefix;
+use Elastica\Filter\Term;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -34,27 +39,65 @@ class NobelController extends Controller
         return array("years" => $years, "categories" => $categories);
     }
 
+//    /**
+//     * @Route("/year/{year}", name="laureate.year")
+//     * @Template("DemoBundle:Nobel:year.html.twig")
+//     */
+//    public function yearAction($year)
+//    {
+//        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
+//
+//        return array("year" => $year, "laureates" => $laureates);
+//    }
+
     /**
      * @Route("/year/{year}", name="laureate.year")
-     * @Template("DemoBundle:Nobel:year.html.twig")
+     * @Template("DemoBundle:Nobel:year_es.html.twig")
      */
     public function yearAction($year)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
+        /** @var Search $search */
+        $search = $this->get('nemrod.elastica.search.nobel.laureate');
+        $search->addTermFilter('terms:year', $year);
 
-        return array("year" => $year, "laureates" => $laureates);
+        $result = $search->search();
+        return array('items' => $result['items'], 'year' => $year);
     }
+
+
+
+//    /**
+//     * @Route("/category/{category}", name="laureate.category", requirements={"category" = ".+"})
+//     * @Template("DemoBundle:Nobel:category.html.twig")
+//     * @ParamConverter("category", class="terms:Category")
+//     */
+//    public function categoryAction($category)
+//    {
+//        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category));
+//
+//        return array("category" => $category, "laureates" => $laureates);
+//    }
 
     /**
      * @Route("/category/{category}", name="laureate.category", requirements={"category" = ".+"})
-     * @Template("DemoBundle:Nobel:category.html.twig")
-     * @ParamConverter("category", class="terms:Category")
+     * @Template("DemoBundle:Nobel:category_es.html.twig")
      */
     public function categoryAction($category)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category));
+        $bool = new Bool();
+        $bool->addMust(new Term(array('terms:category._id'=> $category)));
+        /** @var Search $search */
+        $search = $this->get('nemrod.elastica.search.nobel.laureate');
+        //$nested = new Nested();
+        //$nested->setPath("terms:category");
+        //$nested->setFilter($bool);
+        //$search->addermFilter('terms:category._id', "htt");
+        $search->setFilters(array($bool));
+        $result = $search->search();
 
-        return array("category" => $category, "laureates" => $laureates);
+        var_dump($result);
+        return array('laureates' => $result['items'], 'category' => $category);
+
     }
 
     /**

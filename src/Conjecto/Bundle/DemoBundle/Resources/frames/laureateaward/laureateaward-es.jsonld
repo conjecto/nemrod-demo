@@ -2,5 +2,16 @@
   "@type": "terms:LaureateAward",
   "rdfs:label": {
     "@default": "non"
+  },
+
+  "terms:year": {
+    "@default": "2000"
+  },
+  "terms:category": {
+    "@default": "???",
+    "@mapping": {
+      "type": "object",
+      "index": "not_analyzed"
+    }
   }
 }

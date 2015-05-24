@@ -63,7 +63,7 @@ elastica:
   clients:
     default:
       host: localhost
-      port: 9300
+      port: 9200
   indexes:
     nobel:
       client: default

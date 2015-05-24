@@ -67,6 +67,20 @@ the installation steps. Once it is done, enable Nemrod ElasticSearch Bundle by u
 
     //new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle(),
 
+Uncomment the corresponding section of the configuration file ``app/config/config.yml``:
+      
+    #elastica:
+    #  clients:
+    #    default:
+    #...
+    #
+
+Populate the Elasticsearch engine with the Nobel Prize data:
+
+    php app/console nemrod:elastica:populate
+
+(this operation may take a couple of minutes depending on your computer). One last thing now: lets have the list pages making use
+ of the power ofElasticsearch. Uncomment the two functions in ``src/Conjecto/DemoBundle/Controller/NobelController.php``:
 
 # The project is ready to be tested now !
 
