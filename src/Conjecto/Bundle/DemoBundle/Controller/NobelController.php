@@ -52,7 +52,7 @@ class NobelController extends Controller
      */
     public function categoryAction($category)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category));
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category), array('orderBy' => '?s', 'limit' => 10));
 
         return array("category" => $category, "laureates" => $laureates);
     }
