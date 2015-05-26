@@ -1,10 +1,4 @@
 parameters:
-    database_driver:   pdo_mysql
-    database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
@@ -17,3 +11,7 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    nemrod_endpoint_host:   http://localhost
+    nemrod_endpoint_port:   9999
+    nemrod_endpoint_path:   bigdata/sparql

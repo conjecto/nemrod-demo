@@ -2,6 +2,8 @@
 
 namespace Conjecto\Bundle\DemoBundle\Controller;
 
+use Conjecto\Nemrod\Resource;
+use EasyRdf\Literal\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,6 +25,7 @@ class NobelController extends Controller
             ->select("DISTINCT ?year")
             ->where('?s terms:year ?year')
             ->addFilter('?year > 0')
+            ->OrderBy('?year')
             ->getQuery()
             ->execute();
 
@@ -37,9 +40,7 @@ class NobelController extends Controller
      */
     public function yearAction($year)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => $year));
-
-        //var_dump($laureates);
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
 
         return array("year" => $year, "laureates" => $laureates);
     }
@@ -51,7 +52,7 @@ class NobelController extends Controller
      */
     public function categoryAction($category)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => "<".$category.">"));
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category));
 
         return array("category" => $category, "laureates" => $laureates);
     }
@@ -64,7 +65,7 @@ class NobelController extends Controller
     {
         $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
 
-        //tweaks to get more infos. @todo in Nemrod : find a way to replace base (EasyRdf) Resource by framework's one
+        //tweaks to get more infos.
         $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($laureateaward->get('terms:laureate/dbpediaowl:birthPlace')->getUri());
         $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
 
@@ -95,8 +96,6 @@ class NobelController extends Controller
             $form->handleRequest($request);
 
             $this->get('rm')->persist($laureateaward);
-
-            //$laureateaward->set('rdfs:label', "bob");
 
             $this->get('rm')->flush();
 
@@ -137,7 +136,7 @@ class NobelController extends Controller
             $this->get('rm')->persist($laureateaward);
             $this->get('rm')->flush();
 
-            return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
+            return $this->redirect($this->generateUrl('laureate.year', array ('year' => 'terms:year')));
         }
 
         $data = array("form" => $form->createView());
