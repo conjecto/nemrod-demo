@@ -3,15 +3,19 @@
   "rdfs:label": {
     "@default": "non"
   },
-
   "terms:year": {
     "@default": "2000"
   },
   "terms:category": {
+    "@type": "terms:Category",
     "@default": "???",
+    "@embed": "true",
     "@mapping": {
       "type": "object",
       "index": "not_analyzed"
+    },
+    "rdfs:label": {
+        "@default": "non"
     }
   }
 }

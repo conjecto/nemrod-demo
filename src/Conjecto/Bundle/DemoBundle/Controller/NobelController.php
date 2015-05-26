@@ -9,6 +9,7 @@ use Elastica\Filter\Bool;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Prefix;
 use Elastica\Filter\Term;
+use Elastica\Util;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -79,24 +80,22 @@ class NobelController extends Controller
 //    }
 
     /**
-     * @Route("/category/{category}", name="laureate.category", requirements={"category" = ".+"})
+     * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
      * @Template("DemoBundle:Nobel:category_es.html.twig")
      */
-    public function categoryAction($category)
+    public function categoryAction($category, $page)
     {
-        $bool = new Bool();
-        $bool->addMust(new Term(array('terms:category._id'=> $category)));
         /** @var Search $search */
         $search = $this->get('nemrod.elastica.search.nobel.laureate');
-        //$nested = new Nested();
-        //$nested->setPath("terms:category");
-        //$nested->setFilter($bool);
-        //$search->addermFilter('terms:category._id', "htt");
-        $search->setFilters(array($bool));
+        $categoryParts = explode('/',$category);
+        $categoryName = strtolower($categoryParts[count($categoryParts)-1]);
+        $search->addTermFilter('terms:category._id', $categoryName);
+        $search->setPage($page);
         $result = $search->search();
 
-        var_dump($result);
-        return array('laureates' => $result['items'], 'category' => $category);
+        $maxPage = ceil($result['total'] / $result['pageSize']);
+
+        return array('laureates' => $result['items'], 'category' => $category, "page" => $page, "lastpage" => $maxPage);
 
     }
 
