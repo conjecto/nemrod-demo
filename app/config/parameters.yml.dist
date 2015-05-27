@@ -15,3 +15,6 @@ parameters:
     nemrod_endpoint_host:   http://localhost
     nemrod_endpoint_port:   9999
     nemrod_endpoint_path:   bigdata/sparql
+
+    elastica_host: localhost
+    elastica_port: 9300

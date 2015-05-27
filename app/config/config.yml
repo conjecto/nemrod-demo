@@ -27,7 +27,7 @@ framework:
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    strict_variables: false
 
 # Assetic Configuration
 assetic:
@@ -56,4 +56,21 @@ nemrod:
     dbpprop: "http://dbpedia.org/property/"
     dbpedia: "http://dbpedia.org/resource/"
     dbpediaowl: "http://dbpedia.org/ontology/"
-    dcterms: http://purl.org/dc/terms/
+    dcterms: "http://purl.org/dc/terms/"
+    dc: "http://purl.org/dc/elements/1.1/"
+    mo: "http://purl.org/ontology/mo/"
+
+
+# Nemrod elastica configuration
+elastica:
+  clients:
+    default:
+      host: %elastica_host%
+      port: %elastica_port%
+  indexes:
+    bibnum:
+      client: default
+      types:
+        signal_group:
+          type: "mo:SignalGroup"
+          frame: "@Demo/signal_group.jsonld"

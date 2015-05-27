@@ -1,0 +1,10 @@
+{
+  "@type": "mo:SignalGroup",
+  "dc:title": {
+        "@mapping": {
+            "type": "string",
+            "index": "not_analyzed"
+
+        }
+  }
+}

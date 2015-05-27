@@ -16,7 +16,8 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "conjecto/nemrod": "dev-develop"
+        "conjecto/nemrod": "dev-develop",
+        "ruflin/elastica": "~1.4.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

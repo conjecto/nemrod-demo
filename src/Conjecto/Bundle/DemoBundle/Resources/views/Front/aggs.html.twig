@@ -1,0 +1,31 @@
+{% macro block_terms(title, field, agg) %}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ title }}</div>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                {% for bucket in agg.buckets %}
+                    {% if app.request.get('filters')[field] is defined and app.request.get('filters')[field]  == bucket.key %}
+                        <li class="active"><a href="{{ path(app.request.attributes.get('_route'), app.request.get('filters') is not empty ? app.request.query.all|merge({page:1, filters:app.request.get('filters')|merge({(field): null})}) : app.request.query.all) }}">{{ bucket.key }} ({{ bucket.doc_count }})</a></li>
+                    {% else %}
+                        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({page:1, filters:(app.request.get('filters') is not empty ? app.request.get('filters') : {})|merge({(field): bucket.key})})) }}">{{ bucket.key }} ({{ bucket.doc_count }})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro block_date_histogram(field, facet, results) %}
+    <ul class="nav nav-list">
+        <li class="nav-header">{{ facet.name }}</li>
+        {% for entry in results.entries %}
+            {% set date = (entry.time/1000)|date("Y") %}
+            {% if app.request.get('ranges')[field] is defined and app.request.get('ranges')[field]  == date %}
+                <li class="active"><a href="{{ path(app.request.attributes.get('_route'), app.request.get('ranges') is not empty ? app.request.query.all|merge({page:1, ranges:app.request.get('ranges')|merge({(field): null})}) : app.request.query.all) }}">{{ date }} ({{ entry.count }})</a></li>
+            {% else %}
+                <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({page:1, ranges:(app.request.get('ranges') is not empty ? app.request.get('ranges') : {})|merge({(field): date})})) }}">{{ date }} ({{ entry.count }})</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endmacro %}
+

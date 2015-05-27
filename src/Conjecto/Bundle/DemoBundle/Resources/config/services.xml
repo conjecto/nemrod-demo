@@ -4,16 +4,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <services>
-        <service id="demo.laureate_form" class="Conjecto\Bundle\DemoBundle\Form\AwardType">
-            <argument type="service" id="rm" />
-            <tag name="form.type" alias="award_type" />
-        </service>
-        <service id="demo.award_form" class="Conjecto\Bundle\DemoBundle\Form\LaureateType">
-            <argument type="service" id="nemrod.namespace_registry" />
-            <argument type="service" id="rm" />
-            <tag name="form.type" alias="resource_laureate" />
-        </service>
-    </services>
+
 
 </container>
