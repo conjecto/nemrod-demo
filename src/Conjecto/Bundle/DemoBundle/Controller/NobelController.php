@@ -2,8 +2,14 @@
 
 namespace Conjecto\Bundle\DemoBundle\Controller;
 
+use Conjecto\Nemrod\ElasticSearch\Search;
 use Conjecto\Nemrod\Resource;
 use EasyRdf\Literal\Integer;
+use Elastica\Filter\Bool;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Prefix;
+use Elastica\Filter\Term;
+use Elastica\Util;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -45,17 +51,57 @@ class NobelController extends Controller
         return array("year" => $year, "laureates" => $laureates);
     }
 
-    /**
-     * @Route("/category/{category}", name="laureate.category", requirements={"category" = ".+"})
-     * @Template("DemoBundle:Nobel:category.html.twig")
-     * @ParamConverter("category", class="terms:Category")
-     */
-    public function categoryAction($category)
-    {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => $category), array('orderBy' => '?s', 'limit' => 10));
+//    /**
+//     * @Route("/year/{year}", name="laureate.year")
+//     * @Template("DemoBundle:Nobel:year_es.html.twig")
+//     */
+//    public function yearESAction($year)
+//    {
+//        /** @var Search $search */
+//        $search = $this->get('nemrod.elastica.search.nobel.laureate');
+//        $search->addTermFilter('terms:year', $year);
+//
+//        $result = $search->search();
+//        return array('items' => $result['items'], 'year' => $year);
+//    }
 
-        return array("category" => $category, "laureates" => $laureates);
+
+    /**
+     * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
+     * @Template("DemoBundle:Nobel:category.html.twig")
+     */
+    public function categoryAction($category, $page)
+    {
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')
+        ->getQueryBuilder()->reset()->select('(COUNT(DISTINCT ?instance) AS ?count)')->where('?instance a terms:LaureateAward; terms:category <'.$category.">")->getQuery()
+        ->execute();
+
+        $num = current($laureates)->count->getValue();
+        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => 10, 'offset'=> ($page *10)));
+
+        return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
     }
+
+//    /**
+//     * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
+//     * @Template("DemoBundle:Nobel:category_es.html.twig")
+//     */
+//    public function categoryESAction($category, $page)
+//    {
+//        /** @var Search $search */
+//        $search = $this->get('nemrod.elastica.search.nobel.laureate');
+//        $categoryParts = explode('/',$category);
+//        $categoryName = strtolower($categoryParts[count($categoryParts)-1]);
+//        $search->addTermFilter('terms:category._id', $categoryName);
+//        $search->setPage($page);
+//        $result = $search->search();
+//
+//
+//        $maxPage = ceil($result['total'] / $result['pageSize']);
+//
+//        return array('laureates' => $result['items'], 'category' => $category, "page" => $page, "lastpage" => $maxPage);
+//
+//    }
 
     /**
      * @Route("/view/{uri}", name="laureate.view", requirements={"uri" = ".+"})
@@ -65,8 +111,13 @@ class NobelController extends Controller
     {
         $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
 
-        //tweaks to get more infos.
-        $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($laureateaward->get('terms:laureate/dbpediaowl:birthPlace')->getUri());
+        $place = $laureateaward->get('terms:laureate/dbpediaowl:birthPlace');
+        //getting more infos.
+        if ($place) {
+            $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($place->getUri());
+            $laureatebirthplace = $laureatebirthplace ? $laureatebirthplace : "";
+        }
+
         $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
 
         $categ = $laureateaward->get("terms:category/rdfs:label");
@@ -76,7 +127,7 @@ class NobelController extends Controller
             "category" => $categ,
             "laureate" => $laureateaward->get('terms:laureate'),
             "places" => array (
-                "birth" => $laureatebirthplace,
+                "birth" => isset($laureatebirthplace) ? $laureatebirthplace : "unknown",
                 "death" => $laureatedeathplace
             )
         );

@@ -7,12 +7,12 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="{{ path('laureate.index') }}">Home</a></li>
-        <li><a href="#">{{ category['rdfs:label'] }}</a></li>
+        <li><a href="#">{{ category }}</a></li>
     </ol>
-    <h1>List of laureates for category {{ category['rdfs:label'] }}</h1>
+    <h1>List of laureates for category {{ category }}</h1>
     <div class="container">
         <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="{{ path( 'laureate.create', {category: category.uri}) }}">add one</a></li>
+            <li role="presentation" class="active"><a href="{{ path( 'laureate.create', {category: category }) }}">add one</a></li>
         </ul>
     </div>
     <br />
@@ -25,5 +25,34 @@
         </div>
     {% endfor %}
     </div>
+    <nav>
+        <ul class="pagination">
+            <li {% if page == 1 %} class="disabled"{% endif %}>
+                <a href="{{ path('laureate.category', {category: category, page: 1}) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            {% set windowStart = max(1, page-2)%}
+            {% set windowEnd = windowStart + 4%}
+
+            {% if windowStart > 1 %}
+                <li><a href="{{ path('laureate.category', {category: category, page: windowStart -1}) }}">...</a></li>
+            {% endif %}
+            {% for counter in windowStart..windowEnd %}
+                {% if counter <= lastpage and counter >=1  %}
+                    <li {% if (counter == page) %} class="active"{% endif %}><a href="{{ path('laureate.category', {category: category, page: counter}) }}">{{ counter }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if windowEnd < lastpage %}
+                <li><a href="{{ path('laureate.category', {category: category, page: windowEnd+1}) }}">...</a></li>
+            {% endif %}
+            <li {% if page == lastpage %} class="disabled"{% endif %}>
+                <a href="{{ path('laureate.category', {category: category, page: lastpage}) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 {% endblock %}
