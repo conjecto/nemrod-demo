@@ -68,9 +68,15 @@ elastica:
       host: %elastica_host%
       port: %elastica_port%
   indexes:
-    bibnum:
+    nemrod_demo:
       client: default
       types:
-        signal_group:
-          type: "mo:SignalGroup"
-          frame: "@Demo/signal_group.jsonld"
+        artist:
+          type: "mo:MusicArtist"
+          frame: "@Demo/artist.jsonld"
+        release:
+          type: "mo:Release"
+          frame: "@Demo/release.jsonld"
+        release:
+          type: "mo:Label"
+          frame: "@Demo/label.jsonld"

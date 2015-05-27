@@ -31,7 +31,7 @@ class FrontController extends Controller
         $aggs = array();
 
         /** @var Index $index */
-        $index = $this->get('nemrod.elastica.index.bibnum');
+        $index = $this->get('nemrod.elastica.index.nemrod_demo');
         $query = new Query();
 
         //
@@ -39,7 +39,7 @@ class FrontController extends Controller
         //
         if($q) {
             $match = new Query\Match();
-            $match->setField('dcterm:title', $q);
+            $match->setField('foaf:name', $q);
         } else {
             $match = new Query\MatchAll();
         }

@@ -24,4 +24,4 @@ class LaureateAward extends BaseResource
      * @Property("terms:laureate", cascade={"persist"})
      */
     protected $laureate;
-} 
+}

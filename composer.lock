@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f19b9e14ffd59aa23046e3ea22a37a27",
+    "hash": "131037398011e2c51396db20d22e3f9f",
     "packages": [
         {
             "name": "conjecto/nemrod",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/conjecto/nemrod.git",
-                "reference": "4f48782789f95c359ea3999846fbab8c675f769a"
+                "reference": "8df3eddb6aadad4e1f2660bc7f955f95d7e718ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/4f48782789f95c359ea3999846fbab8c675f769a",
-                "reference": "4f48782789f95c359ea3999846fbab8c675f769a",
+                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/8df3eddb6aadad4e1f2660bc7f955f95d7e718ab",
+                "reference": "8df3eddb6aadad4e1f2660bc7f955f95d7e718ab",
                 "shasum": ""
             },
             "require": {
@@ -65,7 +65,7 @@
                 "rdfa",
                 "sparql"
             ],
-            "time": "2015-04-28 13:03:45"
+            "time": "2015-05-27 13:02:07"
         },
         {
             "name": "doctrine/annotations",
@@ -1181,16 +1181,16 @@
         },
         {
             "name": "ruflin/elastica",
-            "version": "dev-master",
+            "version": "v1.4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "4b64014ac980e6c072f7556589e8ba5acf0134e0"
+                "reference": "bfa9363bf2aa62af5907135863661c6c78a68ee4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/4b64014ac980e6c072f7556589e8ba5acf0134e0",
-                "reference": "4b64014ac980e6c072f7556589e8ba5acf0134e0",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/bfa9363bf2aa62af5907135863661c6c78a68ee4",
+                "reference": "bfa9363bf2aa62af5907135863661c6c78a68ee4",
                 "shasum": ""
             },
             "require": {
@@ -1236,7 +1236,7 @@
                 "client",
                 "search"
             ],
-            "time": "2015-04-24 14:04:10"
+            "time": "2015-02-17 19:57:36"
         },
         {
             "name": "sensio/distribution-bundle",

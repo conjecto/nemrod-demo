@@ -15,12 +15,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Nemrod demo</a>
+            <a class="navbar-brand" href="{{ path('index') }}">Nemrod demo</a>
         </div>
         <div class="collapse navbar-collapse">
             <form action="{{ path('index') }}" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search in dataset" data-cip-id="cIPJQ342845654">
+                    <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search a artist or an album" data-cip-id="cIPJQ342845654">
                 </div>
                 <button type="submit" class="btn btn-default">Search</button>
             </form>

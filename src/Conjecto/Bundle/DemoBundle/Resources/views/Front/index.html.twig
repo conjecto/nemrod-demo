@@ -10,7 +10,7 @@
             <div class="col-md-9">
                 {% for key,result in results %}
                     <div class="well well-sm">
-                        <h4>{{ result.source['dcterm:title'] }}</h4>
+                        <h4>{{ result.source['foaf:name'] }}</h4>
                         <p>{{ result.source['dcterm:description'] }}</p>
                         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal{{ key }}">View dump</button>
 
