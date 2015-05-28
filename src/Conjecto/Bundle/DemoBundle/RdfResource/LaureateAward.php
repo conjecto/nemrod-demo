@@ -11,11 +11,13 @@ namespace Conjecto\Bundle\DemoBundle\RdfResource;
 use Conjecto\Nemrod\Resource as BaseResource;
 use Conjecto\Nemrod\ResourceManager\Annotation\Resource;
 use Conjecto\Nemrod\ResourceManager\Annotation\Property;
+use Conjecto\Nemrod\Framing\Annotation as Serializer;
 
 /**
  * Class ExampleResource
  * @package Conjecto\Bundle\DemoBundle\RdfResource
  * @Resource(types={"terms:LaureateAward"}, uriPattern = "nobel:laureateaward/")
+ * @Serializer\JsonLd(frame="@Demo/LaureateAward/laureateaward.jsonld")
  */
 class LaureateAward extends BaseResource
 {

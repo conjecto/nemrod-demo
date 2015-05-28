@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -106,31 +107,15 @@ class NobelController extends Controller
     /**
      * @Route("/view/{uri}", name="laureate.view", requirements={"uri" = ".+"})
      * @Template("DemoBundle:Nobel:view.html.twig")
+     * @ParamConverter("laureateaward", class="terms:LaureateAward")
      */
-    public function viewAction($uri)
+    public function viewAction($laureateaward, Request $request)
     {
-        $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
-
-        $place = $laureateaward->get('terms:laureate/dbpediaowl:birthPlace');
-        //getting more infos.
-        if ($place) {
-            $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($place->getUri());
-            $laureatebirthplace = $laureatebirthplace ? $laureatebirthplace : "";
+        if($request->query->get('json')) {
+            $serializer = $this->get('nemrod.jsonld.serializer');
+            return new JsonResponse(json_decode($serializer->serialize($laureateaward)));
         }
-
-        $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
-
-        $categ = $laureateaward->get("terms:category/rdfs:label");
-
-        return array(
-            "award" => $laureateaward ,
-            "category" => $categ,
-            "laureate" => $laureateaward->get('terms:laureate'),
-            "places" => array (
-                "birth" => isset($laureatebirthplace) ? $laureatebirthplace : "unknown",
-                "death" => $laureatedeathplace
-            )
-        );
+        return array('award' => $laureateaward);
     }
 
     /**
