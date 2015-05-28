@@ -1,4 +1,4 @@
 demo:
-    resource: "@DemoBundle/Controller/NobelController.php"
+    resource: "@DemoBundle/Controller/"
     type: annotation
 
