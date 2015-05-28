@@ -83,6 +83,7 @@ class NobelController extends Controller
     /**
      * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
      * @Template("DemoBundle:Nobel:category.html.twig")
+     * @ParamConverter("category", class="terms:Category")
      */
     public function categoryAction($category, $page)
     {
@@ -96,7 +97,7 @@ class NobelController extends Controller
         //Counting elements in category
         $laureates = $qb
             ->select('(COUNT(DISTINCT ?instance) AS ?count)')
-            ->where('?instance a terms:LaureateAward; terms:category <' . $category . ">")
+            ->where('?instance a terms:LaureateAward; terms:category <' . $category->getUri() . ">")
             ->getQuery()
             ->execute();
 
@@ -104,7 +105,7 @@ class NobelController extends Controller
         $repository = $manager->getRepository('terms:LaureateAward');
 
         //getting laureates
-        $laureates = $repository->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => $itemsPerPage, 'offset' => ($page * $itemsPerPage)));
+        $laureates = $repository->findBy(array('terms:category' => $category), array('orderBy' => 'uri', 'limit' => $itemsPerPage, 'offset' => ($page * $itemsPerPage)));
 
         return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
     }
