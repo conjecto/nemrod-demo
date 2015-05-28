@@ -27,7 +27,7 @@ framework:
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    strict_variables: false
 
 # Assetic Configuration
 assetic:
@@ -51,7 +51,7 @@ nemrod:
     rdfs: "http://www.w3.org/2000/01/rdf-schema#"
     foaf: "http://xmlns.com/foaf/0.1/"
     #add the namespaces you need
-    nobel: "http://data.nobelprize.org/resource/"
+    #nobel: "http://data.nobelprize.org/resource/"
     terms: "http://data.nobelprize.org/terms/"
     dbpprop: "http://dbpedia.org/property/"
     dbpedia: "http://dbpedia.org/resource/"

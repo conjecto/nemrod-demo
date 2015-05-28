@@ -26,8 +26,14 @@ class NobelController extends Controller
      */
     public function indexAction()
     {
+        //getting manager
+        $manager = $this->container->get('rm');
+
+        //getting repository
+        $repository = $manager->getRepository('terms:LaureateAward');
+
         //getting years by querying directly the triplet store
-        $years = $this->container->get('rm')->getRepository('terms:LaureateAward')->getQueryBuilder()
+        $years = $repository->getQueryBuilder()
             ->select("DISTINCT ?year")
             ->where('?s terms:year ?year')
             ->addFilter('?year > 0')
@@ -35,7 +41,8 @@ class NobelController extends Controller
             ->getQuery()
             ->execute();
 
-        $categories = $this->container->get('rm')->getRepository('terms:Category')->findAll();
+        //getting all categories
+        $categories = $manager->getRepository('terms:Category')->findAll();
 
         return array("years" => $years, "categories" => $categories);
     }
@@ -46,7 +53,14 @@ class NobelController extends Controller
      */
     public function yearAction($year)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
+        //getting manager
+        $manager = $this->container->get('rm') ;
+
+        //getting repository
+        $repository = $manager->getRepository('terms:LaureateAward');
+
+        //finding laureates for given year
+        $laureates = $repository->findBy(array('terms:year' => New Integer($year)));
 
         return array("year" => $year, "laureates" => $laureates);
     }
@@ -72,12 +86,25 @@ class NobelController extends Controller
      */
     public function categoryAction($category, $page)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')
-        ->getQueryBuilder()->reset()->select('(COUNT(DISTINCT ?instance) AS ?count)')->where('?instance a terms:LaureateAward; terms:category <'.$category.">")->getQuery()
-        ->execute();
+        $itemsPerPage = 10;
+        //getting manager
+        $manager = $this->container->get('rm');
+
+        //getting query builder
+        $qb = $manager->getRepository('terms:LaureateAward')->getQueryBuilder();
+
+        //Counting elements in category
+        $laureates = $qb
+            ->select('(COUNT(DISTINCT ?instance) AS ?count)')
+            ->where('?instance a terms:LaureateAward; terms:category <' . $category . ">")
+            ->getQuery()
+            ->execute();
 
         $num = current($laureates)->count->getValue();
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => 10, 'offset'=> ($page *10)));
+        $repository = $manager->getRepository('terms:LaureateAward');
+
+        //getting laureates
+        $laureates = $repository->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => $itemsPerPage, 'offset' => ($page * $itemsPerPage)));
 
         return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
     }
@@ -106,31 +133,11 @@ class NobelController extends Controller
     /**
      * @Route("/view/{uri}", name="laureate.view", requirements={"uri" = ".+"})
      * @Template("DemoBundle:Nobel:view.html.twig")
+     * @ParamConverter("laureateAward", class="terms:LaureateAward")
      */
-    public function viewAction($uri)
+    public function viewAction($laureateAward)
     {
-        $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
-
-        $place = $laureateaward->get('terms:laureate/dbpediaowl:birthPlace');
-        //getting more infos.
-        if ($place) {
-            $laureatebirthplace = $this->container->get('rm')->getRepository('dbpediaowl:City')->find($place->getUri());
-            $laureatebirthplace = $laureatebirthplace ? $laureatebirthplace : "";
-        }
-
-        $laureatedeathplace = $laureateaward->get('terms:laureate/dbpediaowl:deathPlace') ? $this->container->get('rm')->getRepository('dbpediaowl:Country')->find($laureateaward->get('terms:laureate/dbpediaowl:deathPlace')->getUri()) : null;
-
-        $categ = $laureateaward->get("terms:category/rdfs:label");
-
-        return array(
-            "award" => $laureateaward ,
-            "category" => $categ,
-            "laureate" => $laureateaward->get('terms:laureate'),
-            "places" => array (
-                "birth" => isset($laureatebirthplace) ? $laureatebirthplace : "unknown",
-                "death" => $laureatedeathplace
-            )
-        );
+        return array("award" => $laureateAward);
     }
 
     /**
