@@ -2,12 +2,11 @@
   "@type": "terms:LaureateAward",
   "rdfs:label": {},
   "terms:category": {
-    "@type": "nobel:Category",
+    "@type": "terms:Category",
     "rdfs:label": {}
   },
-  "terms:comment": {},
   "terms:laureate": {
-    "@type": "nobel:Laureate",
+    "@type": "terms:Laureate",
     "rdfs:label": {}
   },
   "terms:motivation": {},

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/conjecto/nemrod.git",
-                "reference": "d1c72100f151a762c32a4d0f8fb4b01a38cb6b3e"
+                "reference": "8ac2558bd9a605c0007e4a32c3c433f7708dabea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/d1c72100f151a762c32a4d0f8fb4b01a38cb6b3e",
-                "reference": "d1c72100f151a762c32a4d0f8fb4b01a38cb6b3e",
+                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/8ac2558bd9a605c0007e4a32c3c433f7708dabea",
+                "reference": "8ac2558bd9a605c0007e4a32c3c433f7708dabea",
                 "shasum": ""
             },
             "require": {
@@ -65,7 +65,7 @@
                 "rdfa",
                 "sparql"
             ],
-            "time": "2015-05-28 11:11:18"
+            "time": "2015-05-28 11:45:03"
         },
         {
             "name": "doctrine/annotations",

@@ -1,8 +1,0 @@
-{
-  "@type": "terms:LaureateAward",
-  "rdfs:label": {},
-  "terms:category": {
-    "@type": "nobel:Category",
-    "rdfs:label": {}
-  }
-}

@@ -51,7 +51,7 @@ nemrod:
     rdfs: "http://www.w3.org/2000/01/rdf-schema#"
     foaf: "http://xmlns.com/foaf/0.1/"
     #add the namespaces you need
-    #nobel: "http://data.nobelprize.org/resource/"
+    nobel: "http://data.nobelprize.org/resource/"
     terms: "http://data.nobelprize.org/terms/"
     dbpprop: "http://dbpedia.org/property/"
     dbpedia: "http://dbpedia.org/resource/"
@@ -67,9 +67,9 @@ elastica:
     nobel:
       client: default
       types:
-#        laureate:
-#          type: "terms:Laureate"
-#          frame: '@Demo/Laureate/laureate-es.jsonld'
+        laureate:
+          type: "terms:Laureate"
+          frame: "@Demo/Laureate/laureate.jsonld"
         award:
           type: "terms:LaureateAward"
-          frame: '@Demo/LaureateAward/laureateaward-es.jsonld'
+          frame: "@Demo/LaureateAward/laureateaward-es.jsonld"
