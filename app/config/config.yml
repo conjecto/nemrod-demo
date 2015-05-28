@@ -58,15 +58,15 @@ nemrod:
     dbpediaowl: "http://dbpedia.org/ontology/"
     dcterms: http://purl.org/dc/terms/
 #elastica for nemrod
-elastica:
-  clients:
-    default:
-      host: %elasticsearch_host%
-      port: %elasticsearch_port%
-  indexes:
-    nobel:
-      client: default
-      types:
-        laureate:
-          type: "terms:LaureateAward"
-          frame: '@Demo/laureateaward/laureateaward-es.jsonld'
+#elastica:
+#  clients:
+#    default:
+#      host: %elasticsearch_host%
+#      port: %elasticsearch_port%
+#  indexes:
+#    nobel:
+#      client: default
+#      types:
+#        laureate:
+#          type: "terms:LaureateAward"
+#          frame: '@Demo/laureateaward/laureateaward-es.jsonld'
