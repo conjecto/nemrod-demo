@@ -5,14 +5,14 @@
     <ol class="breadcrumb">
         <li><a href="{{ path('laureate.index') }}">Home</a></li>
         <li><a href="{{ path('laureate.year', {year: award['terms:year']}) }}">{{ award['terms:year'] }}</a></li>
-        <li><a href="{{ path('laureate.category', {category: award['terms:category']}) }}">{{ category }}</a></li>
+
+        <li><a href="{{ path('laureate.category', {category: award['terms:category']}) }}">{{ award['terms:category']['rdfs:label'] }}</a></li>
     </ol>
     <h1>Award details</h1>
     <h2>Award</h2>
     <dl class="dl-horizontal">
-        {# dump(attribute(award['terms:category'], 'get', ['rdfs:label'])) #}
         <dt>Category</dt>
-        <dd>{{ category }}</dd>
+        <dd>{{ award['terms:category/rdfs:label'] ?: 'unknown' }}</dd>
     </dl>
     <dl class="dl-horizontal">
         <dt>Field</dt>
@@ -21,30 +21,35 @@
     {% if (award['terms:motivation'] is defined) %}
     <dl class="dl-horizontal">
         <dt>Motivation</dt>
-        <dd>{{ award['terms:motivation'].value }}</dd>
+        <dd>{{ award['terms:motivation']?: 'unknown' }}</dd>
     </dl>
     {% endif %}
 
     <h2>Laureate</h2>
     <dl class="dl-horizontal">
         <dt>Name</dt>
-        <dd>{{ laureate['rdfs:label'].value }}</dd>
+        <dd>{{ award['terms:laureate/rdfs:label']?: 'unknown' }}</dd>
     </dl>
+    {% if award['terms:university'] is defined %}
     <dl class="dl-horizontal">
         <dt>Institute</dt>
-        <dd>{{ attribute(attribute(award, 'get', ['terms:university']), 'get', ['rdfs:label']).value }}</dd>
+        <dd>{{ award['terms:university']['rdfs:label']?: 'unknown' }}</dd>
     </dl>
+    {% endif %}
+
     <dl class="dl-horizontal">
+        {% if award['terms:laureate']['foaf:birthday'] is defined %}
         <dt>Birth</dt>
-        <dd>{{ laureate['foaf:birthday'].value|date('Y/m/d') }}
-            {% if(places.birth is not empty) %}({{ attribute(places.birth, 'get', ['rdfs:label']).value }}){% endif %}
+        <dd>{{ award['terms:laureate']['foaf:birthday'].value|date('Y/m/d') }}
+            {% if(award['terms:laureate']['dbpediaowl:birthPlace'] is defined) %}({{ award['terms:laureate']['dbpediaowl:birthPlace']['rdfs:label']?: 'unknown' }}){% endif %}
         </dd>
+        {% endif %}
     </dl>
-    {% if(laureate['dbpprop:dateOfDeath'] is defined) %}
+    {% if(award['terms:laureate']['dbpprop:dateOfDeath'] is defined) %}
     <dl class="dl-horizontal">
         <dt>Death</dt>
-        <dd>{{ laureate['dbpprop:dateOfDeath'].value|date('Y/m/d') }}
-            {% if(places.death is not empty) %}({{ attribute(places.death, 'get', ['rdfs:label']).value }}){% endif %}
+        <dd>{{ award['terms:laureate']['dbpprop:dateOfDeath'].value|date('Y/m/d') }}
+            {% if(award['terms:laureate']['dbpediaowl:deathPlace'] is defined) %}({{ award['terms:laureate']['dbpediaowl:deathPlace']['rdfs:label']?: 'unknown' }}){% endif %}
         </dd>
     </dl>
     {% endif %}

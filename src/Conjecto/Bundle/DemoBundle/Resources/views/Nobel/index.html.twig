@@ -16,7 +16,7 @@
 
     <h2>By category</h2>
     {% for category in categories %}
-        <a href="{{ path('laureate.category', {category: category.uri}) }}" class="btn btn-default btn-sm">{{ category['rdfs:label'] }}</a>
+        <a href="{{ path('laureate.category', {category: category}) }}" class="btn btn-default btn-sm">{{ category['rdfs:label'] }}</a>
     {% endfor %}
 
 

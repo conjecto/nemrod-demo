@@ -27,8 +27,14 @@ class NobelController extends Controller
      */
     public function indexAction()
     {
+        //getting manager
+        $manager = $this->container->get('rm');
+
+        //getting repository
+        $repository = $manager->getRepository('terms:LaureateAward');
+
         //getting years by querying directly the triplet store
-        $years = $this->container->get('rm')->getRepository('terms:LaureateAward')->getQueryBuilder()
+        $years = $repository->getQueryBuilder()
             ->select("DISTINCT ?year")
             ->where('?s terms:year ?year')
             ->addFilter('?year > 0')
@@ -36,7 +42,8 @@ class NobelController extends Controller
             ->getQuery()
             ->execute();
 
-        $categories = $this->container->get('rm')->getRepository('terms:Category')->findAll();
+        //getting all categories
+        $categories = $manager->getRepository('terms:Category')->findAll();
 
         return array("years" => $years, "categories" => $categories);
     }
@@ -47,7 +54,14 @@ class NobelController extends Controller
      */
     public function yearAction($year)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:year' => New Integer($year)));
+        //getting manager
+        $manager = $this->container->get('rm') ;
+
+        //getting repository
+        $repository = $manager->getRepository('terms:LaureateAward');
+
+        //finding laureates for given year
+        $laureates = $repository->findBy(array('terms:year' => New Integer($year)));
 
         return array("year" => $year, "laureates" => $laureates);
     }
@@ -73,12 +87,25 @@ class NobelController extends Controller
      */
     public function categoryAction($category, $page)
     {
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')
-        ->getQueryBuilder()->reset()->select('(COUNT(DISTINCT ?instance) AS ?count)')->where('?instance a terms:LaureateAward; terms:category <'.$category.">")->getQuery()
-        ->execute();
+        $itemsPerPage = 10;
+        //getting manager
+        $manager = $this->container->get('rm');
+
+        //getting query builder
+        $qb = $manager->getRepository('terms:LaureateAward')->getQueryBuilder();
+
+        //Counting elements in category
+        $laureates = $qb
+            ->select('(COUNT(DISTINCT ?instance) AS ?count)')
+            ->where('?instance a terms:LaureateAward; terms:category <' . $category . ">")
+            ->getQuery()
+            ->execute();
 
         $num = current($laureates)->count->getValue();
-        $laureates = $this->container->get('rm')->getRepository('terms:LaureateAward')->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => 10, 'offset'=> ($page *10)));
+        $repository = $manager->getRepository('terms:LaureateAward');
+
+        //getting laureates
+        $laureates = $repository->findBy(array('terms:category' => new Resource($category)), array('orderBy' => 'uri', 'limit' => $itemsPerPage, 'offset' => ($page * $itemsPerPage)));
 
         return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
     }
@@ -107,15 +134,15 @@ class NobelController extends Controller
     /**
      * @Route("/view/{uri}", name="laureate.view", requirements={"uri" = ".+"})
      * @Template("DemoBundle:Nobel:view.html.twig")
-     * @ParamConverter("laureateaward", class="terms:LaureateAward")
+     * @ParamConverter("laureateAward", class="terms:LaureateAward")
      */
-    public function viewAction($laureateaward, Request $request)
+    public function viewAction($laureateAward)
     {
         if($request->query->get('json')) {
             $serializer = $this->get('nemrod.jsonld.serializer');
             return new JsonResponse(json_decode($serializer->serialize($laureateaward)));
         }
-        return array('award' => $laureateaward);
+        return array("award" => $laureateAward);
     }
 
     /**

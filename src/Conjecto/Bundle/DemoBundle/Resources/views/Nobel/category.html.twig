@@ -20,8 +20,8 @@
     {% for laureateaward in laureates %}
         <div class="list-group-item">
             <h4 class="list-group-item-heading">{% if laureateaward['rdfs:label'] is defined %}{{ laureateaward['rdfs:label'].value }}{% else %} ??? {% endif %}</h4>
-            <a class="btn btn-primary btn-sm" href="{{ path('laureate.view', {uri: laureateaward.uri}) }}">See more</a>
-            <a class="btn btn-primary btn-sm" href="{{ path('laureate.edit', {uri: laureateaward.uri}) }}">Edit</a>
+            <a class="btn btn-primary btn-sm" href="{{ path('laureate.view', {uri: laureateaward }) }}">See more</a>
+            <a class="btn btn-primary btn-sm" href="{{ path('laureate.edit', {uri: laureateaward}) }}">Edit</a>
         </div>
     {% endfor %}
     </div>
