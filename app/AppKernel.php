@@ -17,7 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new Conjecto\Nemrod\Bundle\NemrodBundle\NemrodBundle(),
-            //new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle(),
+            new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle(),
             new Conjecto\Bundle\DemoBundle\DemoBundle(),
         );
 
