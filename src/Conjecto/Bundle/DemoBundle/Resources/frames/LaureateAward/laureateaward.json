@@ -2,20 +2,17 @@
   "@type": "terms:LaureateAward",
   "rdfs:label": {},
   "terms:category": {
+    "@type": "nobel:Category",
     "rdfs:label": {}
   },
   "terms:comment": {},
   "terms:laureate": {
-    "rdfs:label": {},
-    "dbpediaowl:birthPlace": {
-      "rdfs:label": {}
-    },
-    "dbpediaowl:deathPlace": {
-      "rdfs:label": {}
-    }
+    "@type": "nobel:Laureate",
+    "rdfs:label": {}
   },
   "terms:motivation": {},
   "terms:university": {
+    "@type": "dbpediaowl:University",
     "rdfs:label": {}
   },
   "terms:year": {}

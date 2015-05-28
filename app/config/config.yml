@@ -57,16 +57,19 @@ nemrod:
     dbpedia: "http://dbpedia.org/resource/"
     dbpediaowl: "http://dbpedia.org/ontology/"
     dcterms: http://purl.org/dc/terms/
-#elastica for nemrod
-#elastica:
-#  clients:
-#    default:
-#      host: %elasticsearch_host%
-#      port: %elasticsearch_port%
-#  indexes:
-#    nobel:
-#      client: default
-#      types:
+
+elastica:
+  clients:
+    default:
+      host: %elasticsearch_host%
+      port: %elasticsearch_port%
+  indexes:
+    nobel:
+      client: default
+      types:
 #        laureate:
-#          type: "terms:LaureateAward"
-#          frame: '@Demo/laureateaward/laureateaward-es.jsonld'
+#          type: "terms:Laureate"
+#          frame: '@Demo/Laureate/laureate-es.jsonld'
+        award:
+          type: "terms:LaureateAward"
+          frame: '@Demo/LaureateAward/laureateaward-es.jsonld'
