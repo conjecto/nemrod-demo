@@ -2,7 +2,7 @@ Nemrod demo project
 ========================
 
 This project is based on a [Symfony][1] Standard Edition and allows to quickly set a demonstration environment for the
-Nemrod framework
+[Nemrod framework][2]
 
 1) Requirements
 ----------------------------------
@@ -15,11 +15,11 @@ Nemrod framework
 
 ### Cloning the project
 
-    git clone https://github.com/conjecto/nemrod-demo
+    git clone http://github.com/conjecto/nemrod-demo
 
 ### Installing Composer
 
-[Composer][2] is a tool for dependency management in PHP, used by Symfony and Nemrod.
+[Composer][3] is a tool for dependency management in PHP, used by Symfony and Nemrod.
 If you don't have Composer yet, download it following the instructions on
 http://getcomposer.org/ or just run the following command:
 
@@ -73,7 +73,7 @@ the installation steps. Once the server is running, populate the Elasticsearch e
 
 Try it at the url that was given when launching the server. For now, you can
  
- - bowse the nobel prize by years / categories
+ - browse the nobel prize by years / categories
  - add a new nobel prize.
 
 
