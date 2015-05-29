@@ -63,28 +63,11 @@ The demo project is built over a set of data describing [Nobel Prize laureates][
 and list displays way faster. Follow these few steps if you want to try it on the demo.
 
 You first need to download the current version of ElasticSearch. It can be done [here](https://www.elastic.co/downloads/elasticsearch). You just have to follow
-the installation steps. Once it is done, enable Nemrod ElasticSearch Bundle by uncommenting the following line:
-
-    //new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle(),
-
-Uncomment the corresponding section of the configuration file ``app/config/config.yml``:
-      
-    #elastica:
-    #  clients:
-    #    default:
-    #...
-    #
-
-Populate the Elasticsearch engine with the Nobel Prize data:
+the installation steps. Once the server is running, populate the Elasticsearch engine with the Nobel Prize data:
 
     php app/console nemrod:elastica:populate
 
-(this operation may take a couple of minutes depending on your computer). One last thing now: lets have the list pages making use
-of the power of Elasticsearch. Uncomment the two functions ``yearESAction`` and ``categoryESAction``, and comment the functions
- ``yearAction`` and ``categoryAction``
-(together with the ``/** ... */`` section above each) in ``src/Conjecto/DemoBundle/Controller/NobelController.php``.
- 
- Now, the lists displayed in the category and year sections are taken directly from Elasticsearch.
+(this operation may take a couple of minutes depending on your computer). Now the Elasticsearch section is available.
 
 # The project is ready to be tested now !
 

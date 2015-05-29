@@ -65,21 +65,6 @@ class NobelController extends Controller
         return array("year" => $year, "laureates" => $laureates);
     }
 
-//    /**
-//     * @Route("/year/{year}", name="laureate.year")
-//     * @Template("DemoBundle:Nobel:year_es.html.twig")
-//     */
-//    public function yearESAction($year)
-//    {
-//        /** @var Search $search */
-//        $search = $this->get('nemrod.elastica.search.nobel.laureate');
-//        $search->addTermFilter('terms:year', $year);
-//
-//        $result = $search->search();
-//        return array('items' => $result['items'], 'year' => $year);
-//    }
-
-
     /**
      * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
      * @Template("DemoBundle:Nobel:category.html.twig")
@@ -109,27 +94,6 @@ class NobelController extends Controller
 
         return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
     }
-
-//    /**
-//     * @Route("/category/{category}/page/{page}", name="laureate.category", requirements={"category" = ".+"}, defaults={"page" = 1})
-//     * @Template("DemoBundle:Nobel:category_es.html.twig")
-//     */
-//    public function categoryESAction($category, $page)
-//    {
-//        /** @var Search $search */
-//        $search = $this->get('nemrod.elastica.search.nobel.laureate');
-//        $categoryParts = explode('/',$category);
-//        $categoryName = strtolower($categoryParts[count($categoryParts)-1]);
-//        $search->addTermFilter('terms:category._id', $categoryName);
-//        $search->setPage($page);
-//        $result = $search->search();
-//
-//
-//        $maxPage = ceil($result['total'] / $result['pageSize']);
-//
-//        return array('laureates' => $result['items'], 'category' => $category, "page" => $page, "lastpage" => $maxPage);
-//
-//    }
 
     /**
      * @Route("/view/{uri}", name="laureate.view", requirements={"uri" = ".+"})
