@@ -60,7 +60,7 @@ class AwardType extends ResourceFormType
             FormEvents::POST_SUBMIT,
             function(FormEvent $event) {
                 $laureate = $event->getForm()->getData();
-                $label = $laureate->get('foaf:familyName') . " " . $laureate->get('foaf:givenName');
+                $label = $laureate->get('foaf:givenName') . " " . $laureate->get('foaf:familyName');
 
                 $laureate->set('rdfs:label', $label);
             }
@@ -72,7 +72,7 @@ class AwardType extends ResourceFormType
             function(FormEvent $event) {
                 $laureateaward = $event->getForm()->getData();
                 $laureate = $event->getForm()->get("terms:laureate")->getData();
-                $label = $laureateaward->get('terms:category/rdfs:label') . ' ' . $laureateaward->get('terms:year') . ', ' . $laureate->get('foaf:familyName') . " " . $laureate->get('foaf:givenName');
+                $label = $laureateaward->get('terms:category/rdfs:label') . ' ' . $laureateaward->get('terms:year') . ', ' . $laureate->get('foaf:givenName') . " " . $laureate->get('foaf:familyName');
 
                 $laureateaward->set('rdfs:label', $label);
             }

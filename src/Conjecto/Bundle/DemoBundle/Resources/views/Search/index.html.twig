@@ -1,0 +1,108 @@
+{% extends "DemoBundle::base.html.twig" %}
+{% import "DemoBundle:Search:aggs.html.twig" as _aggs %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <form class="form-horizontal"  action="{{ path('search') }}">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                    </div>
+                </form>
+                {{ _aggs.block_terms('Type', '_type', aggs['_type']) }}
+
+                {{ _aggs.block_terms('Gender', 'foaf:gender', aggs['foaf_gender']) }}
+                {{ _aggs.block_terms('Category', 'terms:category.rdfs:label', aggs['terms_category']) }}
+                {{ _aggs.block_terms('Year', 'terms:year', aggs['terms_year']) }}
+            </div>
+            <div class="col-md-9">
+                {% for key,result in results %}
+                    <div class="well well-sm">
+                        <h4>{{ result.source['rdfs:label'] }}</h4>
+                        <p>{{ result.source['_type'] }}</p>
+
+                        {% if result.source['_type'] == 'terms:LaureateAward' %}
+                            <p>Laureate : <strong>{{ result.source['terms:laureate']['rdfs:label'] }}</strong></p>
+                            <a class="btn btn-primary btn-xs" href="{{ path('laureate.view', {uri: result.source['_id']}) }}">See more</a>
+                            <a class="btn btn-primary btn-xs" href="{{ path('laureate.edit', {uri: result.source['_id']}) }}">Edit</a>
+                        {% endif %}
+
+                        <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#modal{{ key }}">View dump</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal{{ key }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        {{ dump(result.source) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {{ pagination }}
+    </div>
+{% endblock %}
+
+
+{% set pagination %}
+    {% spaceless %}
+        {% set lastPage = (rs.totalHits/limit) | round(0, 'ceil') %}
+        {% set currentPage = app.request.get('page') ? app.request.get('page') : 1 %}
+        {% if lastPage > 1 %}
+            {% set paginationPath = app.request.attributes.get('_route') %}
+            {% set currentFilters = app.request.query.all %}
+            {% set extremePagesLimit = 3 %}
+            {% set nearbyPagesLimit = 2 %}
+            <nav class="pull-right">
+                <ul class="pagination">
+                    {% if currentPage > 1 %}
+                        <li><a href="{{ path(paginationPath, currentFilters|merge({page: currentPage-1})) }}">&laquo;</a></li>
+
+                        {% for i in range(1, extremePagesLimit) if ( i < currentPage - nearbyPagesLimit ) %}
+                            <li><a href="{{ path(paginationPath, currentFilters|merge({page: i})) }}">{{ i }}</a></li>
+                        {% endfor %}
+
+                        {% if extremePagesLimit + 1 < currentPage - nearbyPagesLimit %}
+                            <li class="disabled"><a href="#">...</a></li>
+                        {% endif %}
+
+                        {% for i in range(currentPage-nearbyPagesLimit, currentPage-1) if ( i > 0 ) %}
+                            <li><a href="{{ path(paginationPath, currentFilters|merge({page: i})) }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+
+                    <li class="active"><a href="{{ path(paginationPath, currentFilters|merge({ page: currentPage })) }}">{{ currentPage }}</a></li>
+
+                    {% if currentPage < lastPage %}
+                        {% for i in range(currentPage+1, currentPage + nearbyPagesLimit) if ( i <= lastPage ) %}
+                            <li><a href="{{ path(paginationPath, currentFilters|merge({page: i})) }}">{{ i }}</a></li>
+                        {% endfor %}
+
+                        {% if  (lastPage - extremePagesLimit) > (currentPage + nearbyPagesLimit) %}
+                            <li class="disabled"><a href="#">...</a></li>
+                        {% endif %}
+
+                        {% for i in range(lastPage - extremePagesLimit+1, lastPage) if ( i > currentPage + nearbyPagesLimit ) %}
+                            <li><a href="{{ path(paginationPath, currentFilters|merge({page: i})) }}">{{ i }}</a></li>
+                        {% endfor %}
+
+                        <li><a href="{{ path(paginationPath, currentFilters|merge({page: currentPage+1})) }}">&raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    {% endspaceless %}
+{% endset %}

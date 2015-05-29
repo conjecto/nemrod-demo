@@ -4,6 +4,7 @@ namespace Conjecto\Bundle\DemoBundle\Controller;
 
 use Conjecto\Nemrod\ElasticSearch\Search;
 use Conjecto\Nemrod\Resource;
+use EasyRdf\Graph;
 use EasyRdf\Literal\Integer;
 use Elastica\Filter\Bool;
 use Elastica\Filter\Nested;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -100,8 +102,12 @@ class NobelController extends Controller
      * @Template("DemoBundle:Nobel:view.html.twig")
      * @ParamConverter("laureateAward", class="terms:LaureateAward")
      */
-    public function viewAction($laureateAward)
+    public function viewAction($laureateAward, Request $request)
     {
+        if($request->query->get('json')) {
+            $serializer = $this->get('nemrod.jsonld.serializer');
+            return new JsonResponse(json_decode($serializer->serialize($laureateAward)));
+        }
         return array("award" => $laureateAward);
     }
 

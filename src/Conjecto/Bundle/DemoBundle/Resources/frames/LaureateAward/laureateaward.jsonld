@@ -3,16 +3,15 @@
   "rdfs:label": {},
   "terms:category": {
     "@type": "terms:Category",
-    "rdfs:label": {
-        "@mapping": {
-            "type": "string",
-            "index": "not_analyzed",
-            "analyzer": "english"
-        }
-    }
+    "rdfs:label": {}
   },
   "terms:laureate": {
     "@type": "terms:Laureate",
+    "rdfs:label": {}
+  },
+  "terms:motivation": {},
+  "terms:university": {
+    "@type": "dbpediaowl:University",
     "rdfs:label": {}
   },
   "terms:year": {}
