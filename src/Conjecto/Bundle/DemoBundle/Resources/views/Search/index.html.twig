@@ -26,11 +26,20 @@
             <div class="col-md-9">
                 {% for key,result in results %}
                     <div class="well well-sm">
+                        {% if result.source['rdfs:label'] is iterable %}
+                        <h4>{{ result.source['rdfs:label'][0] }}</h4>
+                        {% else %}
                         <h4>{{ result.source['rdfs:label'] }}</h4>
+                        {% endif %}
                         <p>{{ result.source['_type'] }}</p>
 
                         {% if result.source['_type'] == 'terms:LaureateAward' %}
-                            <p>Laureate : <strong>{{ result.source['terms:laureate']['rdfs:label'] }}</strong></p>
+                            {% if result.source['terms:laureate']['rdfs:label'] is iterable %}
+                                <p>Laureate : <strong>{{ result.source['terms:laureate']['rdfs:label'][0] }}</strong></p>
+                            {% else %}
+                                <p>Laureate : <strong>{{ result.source['terms:laureate']['rdfs:label'] }}</strong></p>
+                            {% endif %}
+
                             <a class="btn btn-primary btn-xs" href="{{ path('laureate.view', {uri: result.source['_id']}) }}">See more</a>
                             <a class="btn btn-primary btn-xs" href="{{ path('laureate.edit', {uri: result.source['_id']}) }}">Edit</a>
                         {% endif %}
