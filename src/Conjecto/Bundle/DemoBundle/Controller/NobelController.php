@@ -88,7 +88,7 @@ class NobelController extends Controller
             ->getQuery()
             ->execute();
 
-        $num = current($laureates)->count->getValue();
+        $num = current($laureates)['count'];
         $repository = $manager->getRepository('terms:LaureateAward');
 
         //getting laureates
@@ -165,15 +165,15 @@ class NobelController extends Controller
             $this->get('rm')->persist($laureateaward);
             $this->get('rm')->flush();
 
-            return $this->redirect($this->generateUrl('laureate.year', array ('year' => 'terms:year')));
+            return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
         }
 
         $data = array("form" => $form->createView());
-        if($year) {
+        if ($year) {
             $data['year'] = $year ;
         }
 
-        if($category) {
+        if ($category) {
             $data['category'] = array ('uri' => $category, 'label' => $this->container->get('rm')->getRepository('terms:Category')->find($category)->get('rdfs:label')) ;
         }
         return $data;

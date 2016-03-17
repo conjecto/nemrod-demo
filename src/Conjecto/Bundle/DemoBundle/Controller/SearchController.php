@@ -39,10 +39,11 @@ class SearchController extends Controller
         //
         // keywords
         //
-        if($q) {
+        if ($q) {
             $match = new Query\Match();
             $match->setField('rdfs:label', $q);
-        } else {
+        }
+        else {
             $match = new Query\MatchAll();
         }
         $query->setQuery($match);
@@ -50,8 +51,8 @@ class SearchController extends Controller
         //
         // prepare filters
         //
-        if($filters) {
-            foreach($filters as $key => $value) {
+        if ($filters) {
+            foreach ($filters as $key => $value) {
                 $filter = new Term(array($key => $value));
                 $filters[$key] = $filter;
             }
@@ -65,29 +66,31 @@ class SearchController extends Controller
         $query->addAggregation($agg);
 
         // specifics facets
-        if(isset($filters['_type'])) {
-
+        if (isset($filters['_type'])) {
             // terms:LaureateAward
-            if($filters['_type']->getParam('_type') == 'terms:LaureateAward') {
+            if($filters['_type']->getParam('_type') === 'terms:LaureateAward') {
                 // category
                 $agg = new Terms('terms_category');
                 $agg->setField('terms:category.rdfs:label');
                 $query->addAggregation($agg);
+
                 //year
                 $agg = new Terms('terms_year');
                 $agg->setField('terms:year');
                 $query->addAggregation($agg);
-            } else {
+            }
+            else {
                 unset($filters['terms:category.rdfs:label']);
                 unset($filters['terms:year']);
             }
 
             // terms:Laureate
-            if($filters['_type']->getParam('_type') == 'terms:Laureate') {
+            if($filters['_type']->getParam('_type') === 'terms:Laureate') {
                 $agg = new Terms('foaf_gender');
                 $agg->setField('foaf:gender');
                 $query->addAggregation($agg);
-            } else {
+            }
+            else {
                 unset($filters['foaf:gender']);
             }
         }

@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "symfony/symfony": "2.6.*",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -16,7 +16,9 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "conjecto/nemrod": "dev-develop"
+        "conjecto/nemrod": "master",
+        "easyrdf/easyrdf": "@dev",
+        "conjecto/json-ld": "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

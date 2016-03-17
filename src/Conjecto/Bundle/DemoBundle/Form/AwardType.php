@@ -3,6 +3,7 @@
 namespace Conjecto\Bundle\DemoBundle\Form;
 
 use Conjecto\Nemrod\Form\Extension\Core\Type\ResourceFormType;
+use Conjecto\Nemrod\Manager;
 use Conjecto\Nemrod\ResourceManager\Repository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,16 +11,15 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class AwardType extends ResourceFormType
+class AwardType extends AbstractType
 {
-
+    /** @var Manager $rm */
     protected $rm;
 
-    public function __construct($rm){
+    public function __construct(Manager $rm)
+    {
         $this->rm = $rm;
-        return parent::__construct($rm);
     }
-
 
     /**
      * @param FormBuilderInterface $builder
@@ -27,10 +27,9 @@ class AwardType extends ResourceFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder->add('terms:year', 'integer', array('label' => 'Year'));
-        $builder->add('terms:category', 'resource', [
+
+        $builder->add('terms:category', 'resource', array(
             'label' => 'Category',
             'expanded' => false,
             'multiple' => false,
@@ -42,18 +41,20 @@ class AwardType extends ResourceFormType
                 $qb->construct();
                 $qb->where('?s a terms:Category; rdfs:label ?label');
                 return $qb;
-            }]);
+            }
+        ));
+
         $builder->add('terms:field', 'text', array('label' => 'Field'));
+
         $builder->add('terms:motivation', 'textarea', array('label' => 'Motivation'));
 
-
-
-        $builder->add('terms:laureate', new LaureateType($this->rm), array(
+        $builder->add('terms:laureate', new LaureateType(), array(
             'label' => 'Laureate',
             'data_class' => 'Conjecto\Bundle\DemoBundle\RdfResource\Laureate',
-            'empty_data' => function () use ($options){
-            return $this->rm->getRepository('terms:Laureate')->create();
-        }));
+            'empty_data' => function () use ($options) {
+                return $this->rm->getRepository('terms:Laureate')->create();
+            }
+        ));
 
         //listener for setting rdfs:label fields
         $builder->get('terms:laureate')->addEventListener(
@@ -61,7 +62,6 @@ class AwardType extends ResourceFormType
             function(FormEvent $event) {
                 $laureate = $event->getForm()->getData();
                 $label = $laureate->get('foaf:givenName') . " " . $laureate->get('foaf:familyName');
-
                 $laureate->set('rdfs:label', $label);
             }
         );
@@ -73,20 +73,18 @@ class AwardType extends ResourceFormType
                 $laureateaward = $event->getForm()->getData();
                 $laureate = $event->getForm()->get("terms:laureate")->getData();
                 $label = $laureateaward->get('terms:category/rdfs:label') . ' ' . $laureateaward->get('terms:year') . ', ' . $laureate->get('foaf:givenName') . " " . $laureate->get('foaf:familyName');
-
                 $laureateaward->set('rdfs:label', $label);
             }
         );
-
-    }
-
-    public function getParent()
-    {
-        return 'resource_form';
     }
 
     public function getName()
     {
         return 'award_type';
+    }
+
+    public function getParent()
+    {
+        return 'resource_form';
     }
 } 

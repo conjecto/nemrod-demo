@@ -11,7 +11,7 @@
     <a class="btn btn-primary pull-right" href="{{ path( 'laureate.create') }}">add one</a>
     <h2>By year</h2>
     {% for year in years %}
-        <a href="{{ path('laureate.year', {year: year.year.value}) }}" class="btn btn-default btn-sm">{{ year.year.value }}</a>
+        <a href="{{ path('laureate.year', {year: year.year}) }}" class="btn btn-default btn-sm">{{ year.year }}</a>
     {% endfor %}
 
     <h2>By category</h2>

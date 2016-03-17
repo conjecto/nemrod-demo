@@ -45,12 +45,12 @@ The command will tell you te project's url. This is where the demo will be avail
 
 We recommend [Blazegraph][4], a full open-source high-performance graph database. You first need to download a bundled version of Blazegraph. It can be done [here][6], or using curl with the following command:
 
-    curl -L http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download > bigdata-bundled.jar
+    curl -L https://sourceforge.net/projects/bigdata/files/bigdata/2.0.1/bigdata.jar/download > blazegraph.jar
 
 You can then launch it with the following command:
-
-    java -server -Xmx4g -jar bigdata-bundled.jar
     
+    java -server -Xmx4g -jar blazegraph.jar
+
 You will probably need to adjust the maximm allocation pool parameter. Try for example -Xmx2g or -Xmx1g if you get an error with -Xmx4g. 
 
 The demo project is built over a set of data describing [Nobel Prize laureates][5]. Load it into Blazegraph using:
@@ -82,5 +82,5 @@ Try it at the url that was given when launching the server. For now, you can
 [3]: http://getcomposer.org/
 [4]: http://www.blazegraph.com/
 [5]: http://datahub.io/dataset/nobelprizes
-[6]: http://sourceforge.net/projects/bigdata/files/bigdata/1.5.0/bigdata-bundled.jar/download
+[6]: https://sourceforge.net/projects/bigdata/files/bigdata/2.0.1/bigdata.jar/download
 [7]: https://www.elastic.co/products/elasticsearch
