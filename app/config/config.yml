@@ -66,6 +66,12 @@ elastica:
   indexes:
     nobel:
       client: default
+      settings:
+        index:
+          analysis:
+            analyzer:
+              en:
+                tokenizer: standard
       types:
         laureate:
           type: "terms:Laureate"

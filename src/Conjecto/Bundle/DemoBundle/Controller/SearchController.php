@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller
 {
-
     /**
      * @Route("/search", name="search")
      * @Template("DemoBundle:Search:index.html.twig")

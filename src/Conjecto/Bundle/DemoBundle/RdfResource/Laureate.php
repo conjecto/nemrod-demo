@@ -8,7 +8,7 @@ use Conjecto\Nemrod\ResourceManager\Annotation\Resource;
 /**
  * Class ExampleResource
  * @package Conjecto\Bundle\DemoBundle\RdfResource
- * @Resource(types={"terms:Laureate"}, uriPattern = "nobel:laureate/")
+ * @Resource(types={"terms:Laureate"}, uriPattern = "http://data.nobelprize.org/resource/laureate/")
  */
 class Laureate extends BaseResource
 {

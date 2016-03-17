@@ -16,7 +16,7 @@ use Conjecto\Nemrod\Framing\Annotation as Serializer;
 /**
  * Class ExampleResource
  * @package Conjecto\Bundle\DemoBundle\RdfResource
- * @Resource(types={"terms:LaureateAward"}, uriPattern = "nobel:laureateaward/")
+ * @Resource(types={"terms:LaureateAward"}, uriPattern = "http://data.nobelprize.org/resource/laureateaward/")
  * @Serializer\JsonLd(frame="@Demo/LaureateAward/laureateaward.jsonld")
  */
 class LaureateAward extends BaseResource
