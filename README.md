@@ -45,7 +45,7 @@ The command will tell you te project's url. This is where the demo will be avail
 
 We recommend [Blazegraph][4], a full open-source high-performance graph database. You first need to download a bundled version of Blazegraph. It can be done [here][6], or using curl with the following command:
 
-    curl -L https://sourceforge.net/projects/bigdata/files/bigdata/2.0.1/bigdata.jar/download > blazegraph.jar
+    curl -L https://sourceforge.net/projects/bigdata/files/bigdata/2.0.0/bigdata.jar/download > blazegraph.jar
 
 You can then launch it with the following command:
     
@@ -56,6 +56,9 @@ You will probably need to adjust the maximm allocation pool parameter. Try for e
 The demo project is built over a set of data describing [Nobel Prize laureates][5]. Load it into Blazegraph using:
 
     curl -X POST --data-binary "uri=http://data.nobelprize.org/dump.nt" http://localhost:9999/bigdata/sparql
+
+If this dump doest not work because of error "org.openrdf.rio.RDFParseException: Barack Obama [line 27058]", you should download locally this dump and remove the line 27058 "<http://data.nobelprize.org/resource/laureate/845> <http://www.w3.org/2002/07/owl#sameAs> Barack Obama".
+Then go on http://localhost:9999/bigdata/#update and upload this file. Then choose options Rdf Data type and N-Triples format. Click on update.
 
 ### (optionnal) setting an Elasticsearch server
 
@@ -69,12 +72,15 @@ the installation steps. Once the server is running, populate the Elasticsearch e
 
 (this operation may take a couple of minutes depending on your computer). Now the Elasticsearch section is available.
 
+If you don't want to test elasticsearch, please comment the line "new Conjecto\Nemrod\Bundle\ElasticaBundle\ElasticaBundle()" of you AppKernel and all the elastica configuration in config.yml. 
+
 # The project is ready to be tested now !
 
 Try it at the url that was given when launching the server. For now, you can
  
  - browse the nobel prize by years / categories
- - add a new nobel prize.
+ - add a new nobel prize and edit one
+ - make a text search from elasticsearch
 
 
 [1]: http://symfony.com/doc/2.4/book/installation.html
@@ -82,5 +88,5 @@ Try it at the url that was given when launching the server. For now, you can
 [3]: http://getcomposer.org/
 [4]: http://www.blazegraph.com/
 [5]: http://datahub.io/dataset/nobelprizes
-[6]: https://sourceforge.net/projects/bigdata/files/bigdata/2.0.1/bigdata.jar/download
+[6]: https://sourceforge.net/projects/bigdata/files/bigdata/2.0.0/bigdata.jar/download
 [7]: https://www.elastic.co/products/elasticsearch
