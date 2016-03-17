@@ -68,7 +68,7 @@ and list displays way faster. Follow these few steps if you want to try it on th
 You first need to download the current version of ElasticSearch. It can be done [here](https://www.elastic.co/downloads/elasticsearch). You just have to follow
 the installation steps. Once the server is running, populate the Elasticsearch engine with the Nobel Prize data:
 
-    php app/console nemrod:elastica:populate
+    php app/console nemrod:elastica:populate --index=nobel
 
 (this operation may take a couple of minutes depending on your computer). Now the Elasticsearch section is available.
 
@@ -83,7 +83,7 @@ Try it at the url that was given when launching the server. For now, you can
  - make a text search from elasticsearch
 
 
-[1]: http://symfony.com/doc/2.4/book/installation.html
+[1]: https://symfony.com/doc/2.6/book/installation.html
 [2]: https://github.com/conjecto/nemrod
 [3]: http://getcomposer.org/
 [4]: http://www.blazegraph.com/
