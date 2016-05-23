@@ -2,12 +2,11 @@
 
 namespace Conjecto\Bundle\DemoBundle\Form;
 
-use Conjecto\Nemrod\Form\Extension\Core\Type\ResourceFormType;
 use Conjecto\Nemrod\Manager;
 use Conjecto\Nemrod\ResourceManager\Repository;
+use EasyRdf\Literal;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -34,14 +33,21 @@ class AwardType extends AbstractType
             'expanded' => false,
             'multiple' => false,
             'class' => 'terms:Category',
-            'property' => 'rdfs:label',
-            'query_builder' => function (Repository $repo) {
+            'property' => 'rdfs:label', // this is default property, you can remove this line to use rdfs:label as display property
+            'query_builder' => function (Repository $repo) { // this query is default executed query with Nemrod, based on class and property given
                 $qb = $repo->getQueryBuilder();
                 $qb->reset();
                 $qb->construct();
-                $qb->where('?s a terms:Category; rdfs:label ?label');
+                $qb->where('?s a terms:Category; rdfs:value ?value; rdfs:label ?label');
                 return $qb;
-            }
+            },
+//            'group_by' => function($resource, $label, $value) { // group by a specific property example
+//                return (string)$resource->get('rdfs:value');
+//            },
+//            'preferred_choices' => function ($choice) {  // preferred_choices use example
+//                $preferredChoices = array("Physics");
+//                return false !== array_search((string)$choice->get('rdfs:label'), $preferredChoices, true);
+//            }
         ));
 
         $builder->add('terms:field', 'text', array('label' => 'Field'));
