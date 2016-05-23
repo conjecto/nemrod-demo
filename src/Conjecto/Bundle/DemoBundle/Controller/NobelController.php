@@ -2,10 +2,12 @@
 
 namespace Conjecto\Bundle\DemoBundle\Controller;
 
+use Conjecto\Bundle\DemoBundle\RdfResource\LaureateAward;
 use Conjecto\Nemrod\ElasticSearch\Search;
 use Conjecto\Nemrod\Resource;
 use EasyRdf\Graph;
 use EasyRdf\Literal\Integer;
+use EasyRdf\RdfNamespace;
 use Elastica\Filter\Bool;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Prefix;
@@ -21,7 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NobelController extends Controller
 {
-
     /**
      * @Route("/", name="laureate.index")
      * @Template("DemoBundle:Nobel:index.html.twig")
@@ -94,7 +95,7 @@ class NobelController extends Controller
         //getting laureates
         $laureates = $repository->findBy(array('terms:category' => $category), array('orderBy' => 'uri', 'limit' => $itemsPerPage, 'offset' => ($page * $itemsPerPage)));
 
-        return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num/10) );
+        return array("category" => $category, "laureates" => $laureates, "page" => $page, "lastpage" => floor($num / 10));
     }
 
     /**
@@ -118,14 +119,11 @@ class NobelController extends Controller
     public function editAction(Request $request, $uri)
     {
         $laureateaward = $this->container->get('rm')->getRepository('terms:LaureateAward')->find($uri);
-
         $form = $form = $this->createForm('award_type', $laureateaward);
 
         if ($request->getMethod() == "POST") {
             $form->handleRequest($request);
-
             $this->get('rm')->persist($laureateaward);
-
             $this->get('rm')->flush();
 
             return $this->redirect($this->generateUrl('laureate.year', array ('year' => $laureateaward->get('terms:year'))));
@@ -179,4 +177,15 @@ class NobelController extends Controller
         return $data;
     }
 
+    /**
+     * @Route("/remove/{uri}", name="laureate.remove", requirements={"uri" = ".+"})
+     * @ParamConverter("laureateAward", class="terms:LaureateAward")
+     */
+    public function removeAction($laureateAward)
+    {
+        $this->container->get('rm')->remove($laureateAward);
+        $this->container->get('rm')->flush();
+
+        return $this->redirect($this->generateUrl('laureate.index'));
+    }
 }

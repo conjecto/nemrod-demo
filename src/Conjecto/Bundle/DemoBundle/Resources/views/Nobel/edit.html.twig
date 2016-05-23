@@ -18,8 +18,13 @@
     {% endfor %}
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-default" type="submit" >Save</button>
+        <div class="row">
+            <div class="col-sm-offset-2 col-xs-9">
+                <button class="btn btn-default" type="submit" >Save</button>
+            </div>
+            <div class="col-xs-1">
+                <a href="{{ path('laureate.remove', {uri: laureate}) }}" class="btn btn-default btn-danger">Remove</a>
+            </div>
         </div>
     </div>
 

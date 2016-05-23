@@ -32,12 +32,27 @@
                         <h4>{{ result.source['rdfs:label'] }}</h4>
                         {% endif %}
                         <p>
-                            {% for type in result.source['_type'] %}
-                                {{ type }}
-                            {% endfor %}
+                            {% if result.source._type is iterable %}
+                                {% for type in result.source._type %}
+                                    {{ type }}
+                                {% endfor %}
+                            {% else %}
+                                {{ result.source._type }}
+                            {% endif %}
                         </p>
 
-                        {% if result.source['_type'] == 'terms:LaureateAward' %}
+                        {% set isLaureateAward = 0 %}
+                        {% if result.source._type is iterable %}
+                            {% for type in result.source._type %}
+                                {% if type == 'terms:LaureateAward' %}
+                                    {% set isLaureateAward = 1 %}
+                                {% endif %}
+                            {% endfor %}
+                        {% elseif result.source._type == 'terms:LaureateAward' %}
+                            {% set isLaureateAward = 1 %}
+                        {% endif %}
+
+                        {% if isLaureateAward == 1 %}
                             {% if result.source['terms:laureate']['rdfs:label'] is iterable %}
                                 <p>Laureate : <strong>{{ result.source['terms:laureate']['rdfs:label'][0] }}</strong></p>
                             {% else %}
