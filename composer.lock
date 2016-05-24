@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4b74cb63a4e19b7d77bad96044dd775",
-    "content-hash": "3c69814a98ae5d718387fa26deab2af4",
+    "hash": "a1d47f0e1d971969576b6c1dfec1525f",
+    "content-hash": "b74b6f3f978641784fff5255ba4143a2",
     "packages": [
         {
             "name": "conjecto/json-ld",
@@ -62,25 +62,25 @@
         },
         {
             "name": "conjecto/nemrod",
-            "version": "dev-master",
+            "version": "dev-feature-upgrade2sf28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/conjecto/nemrod.git",
-                "reference": "c5b58f6070a11f81dfd01f201c7982bf8bb31da5"
+                "reference": "8dd44e61d6e1ad3e97e1d1a1322fa53615f1dac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/c5b58f6070a11f81dfd01f201c7982bf8bb31da5",
-                "reference": "c5b58f6070a11f81dfd01f201c7982bf8bb31da5",
+                "url": "https://api.github.com/repos/conjecto/nemrod/zipball/8dd44e61d6e1ad3e97e1d1a1322fa53615f1dac5",
+                "reference": "8dd44e61d6e1ad3e97e1d1a1322fa53615f1dac5",
                 "shasum": ""
             },
             "require": {
                 "conjecto/json-ld": "dev-master",
                 "easyrdf/easyrdf": "dev-master",
                 "jms/serializer": "~0.11",
-                "php": ">=5.3.3",
+                "php": ">=5.3.9",
                 "ruflin/elastica": "~1.4.3",
-                "symfony/symfony": "~2.6"
+                "symfony/symfony": "~2.8"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "~1.5",
@@ -119,7 +119,7 @@
                 "rdfa",
                 "sparql"
             ],
-            "time": "2016-05-18 11:56:51"
+            "time": "2016-05-24 07:41:45"
         },
         {
             "name": "doctrine/annotations",
@@ -2448,8 +2448,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "easyrdf/easyrdf": 20,
-        "conjecto/json-ld": 20,
         "conjecto/nemrod": 20
     },
     "prefer-stable": false,
